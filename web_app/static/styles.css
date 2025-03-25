@@ -1,0 +1,335 @@
+#input_file {
+    display: none;
+}
+
+.hover-pointer {
+    text-align: none;
+    line-height: 20px;
+    cursor: pointer;
+    /* Cambia el puntero al pasar sobre el elemento */
+}
+
+#logDiv {
+    border: 1px solid #333;
+    padding: 10px;
+    width: auto;
+    max-height: 300px;
+    /* Altura máxima para 10 líneas (ejemplo) */
+    overflow-y: auto;
+    /* Activa el scroll vertical cuando se supere la altura */
+    font-family: monospace;
+    background-color: #000;
+    font-size: small;
+    color: #00ff00;
+}
+
+.bold {
+    font-weight: normal;
+}
+
+.loading-bar {
+    width: 50px;
+    height: 6px;
+    background: #ddd;
+    position: relative;
+    overflow: hidden;
+    border-radius: 3px;
+    display: none;
+}
+
+.loading-bar::after {
+    content: "";
+    position: absolute;
+    width: 30%;
+    height: 100%;
+    background: #1275e6;
+    animation: loading 1.5s infinite alternate ease-in-out;
+}
+
+@keyframes loading {
+    0% { left: 0%; }
+    100% { left: 70%; }
+}
+
+#actionsTable {
+    display: none;
+}
+
+/* Card styles */
+.card {
+    margin-bottom: 0.5rem;
+}
+
+.card-body {
+    padding: 0.75rem;
+}
+
+.card-body h6 {
+    margin-bottom: 0.25rem;
+}
+
+.card-body h4 {
+    margin-bottom: 0.25rem;
+}
+
+.card-body p {
+    margin-bottom: 0;
+}
+
+/* Input styles within cards */
+.card-body input.form-control {
+    height: 1.75rem;
+    padding: 0.15rem 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+}
+
+/* Table styles */
+.table {
+    margin-bottom: 0;
+}
+
+.table th {
+    padding: 0.35rem;
+    font-size: 0.875rem;
+    vertical-align: middle;
+    line-height: 1.2;
+}
+
+.table td {
+    padding: 0.35rem;
+    font-size: 0.875rem;
+    vertical-align: middle;
+    line-height: 1.2;
+}
+
+.table input[type="checkbox"] {
+    margin: 0;
+    vertical-align: middle;
+    transform: scale(0.9);
+}
+
+.table .badge {
+    padding: 0.2rem 0.4rem;
+    font-size: 0.75rem;
+    line-height: 1.2;
+}
+
+/* Table card specific */
+.tbl-card .card-body {
+    padding: 0.35rem;
+}
+
+/* File upload styles */
+#data_file {
+    width: 100%;
+    display: block;
+    text-align: left;
+    padding: 0.35rem 0.5rem;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    cursor: pointer;
+}
+
+#uploadButton {
+    width: 100%;
+    display: block;
+    text-align: center;
+    margin-top: 0.5rem;
+}
+
+#uploadButton label {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+}
+
+/* Activity log and Entropy test styles */
+#entResults {
+    background-color: #000;
+    color: #00ff00;
+    padding: 10px;
+    font-family: monospace;
+    border: 1px solid #333;
+    border-radius: 0.25rem;
+}
+
+#entResults pre {
+    margin: 0;
+    color: #00ff00;
+}
+
+/* Table header styles */
+.table thead th {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
+    font-weight: 600;
+    color: #495057;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+    padding: 0.5rem;
+    vertical-align: middle;
+}
+
+.table thead th.text-info {
+    color: #0dcaf0;
+    font-weight: 700;
+}
+
+.table thead .badge {
+    background-color: #e9ecef;
+    color: #495057;
+    font-weight: 600;
+    padding: 0.35rem 0.5rem;
+    border: 1px solid #dee2e6;
+    transition: all 0.2s ease;
+}
+
+.table thead .badge:hover {
+    background-color: #dee2e6;
+    color: #212529;
+}
+
+.header-description {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 2rem 2rem 2rem;
+    margin-top: 1.5rem;
+}
+
+.header-description p {
+    font-size: 0.875rem;
+    line-height: 1.5;
+    text-align: justify;
+}
+
+.header-description .disclaimer {
+    font-size: 0.8125rem;
+    color: #dc3545;
+    border-left: 3px solid #dc3545;
+    padding-left: 0.75rem;
+    background-color: rgba(220, 53, 69, 0.05);
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.25rem;
+    margin-bottom: 1.5rem;
+}
+
+.header-description .disclaimer i {
+    margin-right: 0.5rem;
+    vertical-align: middle;
+}
+
+/* Manual Styles */
+.manual-section {
+  border-left: 3px solid #e9ecef;
+  padding-left: 1rem;
+  transition: all 0.3s ease;
+}
+
+.manual-section:hover {
+  border-left-color: #0d6efd;
+}
+
+.manual-section h5 {
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+.manual-section .text-primary {
+  color: #0d6efd !important;
+}
+
+.manual-section .card {
+  border: none;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
+}
+
+.manual-section .card:hover {
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transform: translateY(-2px);
+}
+
+.manual-section .table {
+  margin-bottom: 0;
+}
+
+.manual-section .table th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.manual-section .table td {
+  vertical-align: middle;
+}
+
+.manual-section .list-unstyled li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.manual-section .list-unstyled li:last-child {
+  border-bottom: none;
+}
+
+.manual-section .bg-light {
+  background-color: #f8f9fa !important;
+}
+
+.manual-section .text-muted {
+  color: #6c757d !important;
+}
+
+.manual-section .ti {
+  font-size: 1.1rem;
+}
+
+.manual-section .ti-check {
+  color: #198754;
+}
+
+.manual-section .ti-circle-dot {
+  color: #0d6efd;
+}
+
+.manual-section .ti-alert-triangle {
+  color: #ffc107;
+}
+
+.manual-section .ti-check-circle {
+  color: #198754;
+}
+
+.form-control {
+  height: 1.5rem;
+  padding: 0.1rem 0.5rem;
+  font-size: 0.8125rem;
+  line-height: 1.25rem;
+  border-radius: 0.25rem;
+  border: 1px solid #dee2e6;
+  background-color: #fff;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-control:focus {
+  border-color: #86b7fe;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.form-control:disabled {
+  background-color: #e9ecef;
+  opacity: 0.65;
+}
+
+.form-control::placeholder {
+  color: #6c757d;
+  opacity: 0.65;
+}
+
+.form-control:disabled::placeholder {
+  opacity: 0.5;
+}

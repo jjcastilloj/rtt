@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- [Head] start -->
+
+<head>
+  <title>Randomness test tool</title>
+  <!-- [Meta] -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description"
+    content="Mantis is made using Bootstrap 5 design framework. Download the free admin template & use it for your project.">
+  <meta name="keywords"
+    content="Mantis, Dashboard UI Kit, Bootstrap 5, Admin Template, Admin Dashboard, CRM, CMS, Bootstrap Admin Template">
+  <meta name="author" content="CodedThemes">
+
+  <!-- [Favicon] icon -->
+  <link rel="icon" href="/static/assets/images/random.png" type="image/x-icon"> <!-- [Google Font] Family -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&display=swap"
+    id="main-font-link">
+  <!-- [Tabler Icons] https://tablericons.com -->
+  <link rel="stylesheet" href="/static/assets/fonts/tabler-icons.min.css">
+  <!-- [Feather Icons] https://feathericons.com -->
+  <link rel="stylesheet" href="/static/assets/fonts/feather.css">
+  <!-- [Font Awesome Icons] https://fontawesome.com/icons -->
+  <link rel="stylesheet" href="/static/assets/fonts/fontawesome.css">
+  <!-- [Material Icons] https://fonts.google.com/icons -->
+  <link rel="stylesheet" href="/static/assets/fonts/material.css">
+  <!-- [Template CSS Files] -->
+  <link rel="stylesheet" href="/static/assets/css/style.css" id="main-style-link">
+  <link rel="stylesheet" href="/static/assets/css/style-preset.css">
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<!-- [Head] end -->
+<!-- [Body] Start -->
+
+<body data-pc-preset="preset-1" data-pc-direction="ltr" data-pc-theme="light">
+  <form id="dataForm">
+    <!-- [ Pre-loader ] start -->
+    <div class="loader-bg">
+      <div class="loader-track">
+        <div class="loader-fill"></div>
+      </div>
+    </div>
+    <!-- [ Pre-loader ] End -->
+    <!-- [ Sidebar Menu ] start -->
+    <nav class="pc-sidebar">
+      <div class="navbar-wrapper">
+
+        <div class="navbar-content">
+          <ul class="pc-navbar">
+
+            <li class="pc-item">
+              <a href="#" class="pc-link">
+                <center>
+                  <img src="/static/assets/images/random.png" width="80" height="80">
+                </center>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="pc-link">
+                <center>
+                  <span class="pc-mtext"><strong>Available tests</strong></span>
+                </center>
+              </a>
+            </li>
+
+            <li class="pc-item">
+              <a href="#" class="pc-link">
+                <span class="pc-micon">
+                  <i class="ti ti-list-check"></i>
+                </span>
+                <span class="pc-mtext">NIST SP 800-22</span>
+              </a>
+            </li>
+
+            <li class="pc-item">
+              <a href="#entTest" class="pc-link">
+                <span class="pc-micon">
+                  <i class="ti ti-grain"></i>
+                </span>
+                <span class="pc-mtext">Entropy</span>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="pc-link">
+                <center>
+                  <span class="pc-mtext"><strong>Resources</strong></span>
+                </center>
+              </a>
+            </li>
+
+            <li class="pc-item">
+              <a href="https://csrc.nist.gov/pubs/sp/800/22/r1/upd1/final" class="pc-link" target="_blank">
+                <span class="pc-micon">
+                  <i class="ti ti-book"></i>
+                </span>
+                <span class="pc-mtext">NIST SP 800-2 Rev. 1</span>
+              </a>
+            </li>
+            <li class="pc-item">
+              <a href="/static/manual.html" class="pc-link" target="_blank">
+                <span class="pc-micon">
+                  <i class="ti ti-book"></i>
+                </span>
+                <span class="pc-mtext">User Manual</span>
+              </a>
+            </li>
+
+            
+
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- [ Sidebar Menu ] end --> <!-- [ Header Topbar ] start -->
+    <header class="pc-header">
+      <div class="header-wrapper"> <!-- [Mobile Media Block] start -->
+        <img src="/static/assets/images/randomness.png" width="300" height="40">
+        <div class="header-description mt-2">
+          <p class="text-muted mb-0">
+            The NIST SP 800-22 Statistical Test Suite is a comprehensive set of statistical tests designed to evaluate the randomness of binary sequences. 
+            These tests help assess whether a random number generator produces output that is statistically random and suitable for cryptographic applications.
+          </p>
+          <p class="text-muted mb-0 mt-3 disclaimer">
+            <i class="ti ti-alert-circle"></i> The use of this tool does not guarantee that a sequence is random or that a random number generator is of high quality. 
+            The use of this tool and the interpretation of its results is entirely the responsibility of the user.
+          </p>
+        </div>
+      </div>
+    </header>
+    <!-- [ Header ] end -->
+
+    <!-- [ Main Content ] start -->
+    <div class="pc-container">
+      <div class="pc-content" >
+        <!-- [ breadcrumb ] start -->
+        <div class="row" style="margin-top: 110px;">
+          <div class="col-md-3 col-xl-3">
+            <div class="card">
+              <div class="card-body">
+                <h6 class="mb-2 f-w-400 text-muted"><strong>Random numbers binary file:</strong></h6>
+                <label id="data_file" class="form-control text-primary text-sm mb-2 f-w-400" style="min-width: 200px; min-height: 50px;"
+                  onclick="selectFile()"><strong>Click to select</strong></label>
+                <input type="file" id="input_file" data-group="files">
+                <h5>
+                  <span id="uploadButton" class="badge bg-light-primary border border-primary hover-pointer" onclick="uploadFile()">
+                    <i class="ti ti-cloud-upload"></i> <label id="uploadLbl" class="hover-pointer">Upload</label>
+                  </span>
+                </h5>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-xl-3">
+            <div class="card">
+              <div class="card-body">
+                <h6 class="mb-2 f-w-400 text-muted"><strong> Secuence size (bits) <i class="ti ti-help"
+                      title="Size of the bits secuence for each test."> </i></strong></h6>
+                <h4 class="mb-3"><input id="secuenceSize" type="text" value="1000000" data-group="sec-params" onclick="clearTable()"
+                    maxlength="7" size="8" class="form-control" pattern="\d*" title="Ingrese hasta 7 dígitos" disabled>
+                </h4>
+                <p class="mb-0 text-muted text-sm"><strong>NIST recomendation: <span
+                      class="text-success">1.000.000</strong></span>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-xl-3">
+            <div class="card">
+              <div class="card-body">
+                <h6 class="mb-2 f-w-400 text-muted"><strong>Number of secuences <i class="ti ti-help"
+                      title="Number of secuences to use in the test."></i></strong></h6>
+                <h4 class="mb-3"><input id="secuenceNum" type="text" data-group="sec-params" maxlength="6" class="form-control" value="1000"
+                    onclick="clearTable()" disabled>
+                </h4>
+                <p class="mb-0 text-muted text-sm"><strong>NIST recomendation: <span class="text-success">>
+                      100</strong></span></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-xl-3">
+            <div class="card border-0 bg-transparent">
+              <div class="card-body">
+                <h5 class="card-title">Options:</h5>
+                <ul class="list-unstyled">
+                  <li class="form-check">
+                    <label class="form-check-label" id="lblSample" onclick="defaultSample()"> <i class="ti ti-archive"></i> Load sample binary random file</label>
+                  </li>
+                  <li class="form-check">    
+                    <label class="form-check-label" for="blockSize" id='lblBlock' onclick="defaultBlockSizes()" ><i class="ti ti-writing"></i> Enter block size values manually</label>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+
+        <!-- [ breadcrumb ] end -->
+
+        <!-- [ Main Content ] start -->
+        <div class="row">
+          <!-- [ sample-page ] start -->
+          <div class="col-md-2 col-xl-2">
+            <div class="card">
+              <div class="card-body">
+                <h6 class="mb-2 f-w-400 text-muted"><strong>Block Frequency </strong></h6>
+                <h6 class="mb-3"><input id="blockFreq" type="text" maxlength="3" data-group="block-params" class="form-control" value="128"
+                    onclick="clearTable()"> </h4>
+                  <p class="mb-0 text-muted text-sm"><strong>Block size <span class="text-success">
+                        128</strong></span></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-2 col-xl-2">
+            <div class="card">
+              <div class="card-body">
+                <h6 class="mb-2 f-w-400 text-muted"><strong>Non Overlapping Template </strong></h6>
+                <h4 class="mb-3"><input id="blockNon" type="text" maxlength="1" data-group="block-params" class="form-control" value="9" disabled>
+                </h4>
+                <p class="mb-0 text-muted text-sm"><strong>Block size <span class="text-success">
+                      9</strong></span></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-2 col-xl-2">
+            <div class="card">
+              <div class="card-body">
+                <h6 class="mb-2 f-w-400 text-muted"><strong>Overlapping Template </strong></h6>
+                <h4 class="mb-3"><input id="blockOver" type="text" maxlength="1" data-group="block-params" class="form-control" value="9"
+                    disabled></h4>
+                <p class="mb-0 text-muted text-sm"><strong>Block size <span class="text-success">
+                      9</strong></span></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-2 col-xl-2">
+            <div class="card">
+              <div class="card-body">
+                <h6 class="mb-2 f-w-400 text-muted"><strong>Approximate entropy</strong></h6>
+                <h4 class="mb-3"><input id="blockApprox" type="text" maxlength="2" data-group="block-params" class="form-control" value="10"
+                    disabled></h4>
+                <p class="mb-0 text-muted text-sm"><strong>Block size <span class="text-success">
+                      10</strong></span></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-2 col-xl-2">
+            <div class="card">
+              <div class="card-body">
+                <h6 class="mb-2 f-w-400 text-muted"><strong>Serial Test</strong></h6>
+                <h4 class="mb-3"><input id="blockSerial" type="text" maxlength="2" data-group="block-params" class="form-control" value="16"
+                    disabled></h4>
+                <p class="mb-0 text-muted text-sm"><strong>Block size <span class="text-success">
+                      16</strong></span></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-2 col-xl-2">
+            <div class="card">
+              <div class="card-body">
+                <h6 class="mb-2 f-w-400 text-muted"><strong>Linear Complexity</strong></h6>
+                <h4 class="mb-3"><input id="blockLinear" type="text" maxlength="3" data-group="block-params" class="form-control" value="500"
+                    disabled></h4>
+                <p class="mb-0 text-muted text-sm"><strong>Block size <span class="text-success">
+                      500</strong></span></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-xl-8">
+            <h6 class="text-muted">Select the tests to process</h6>
+            <div class="card tbl-card">
+              <div class="card-body">
+                <div class="table-responsive">
+
+                  <table id="resultsTable" class="table table-hover table-borderless mb-0">
+                    <thead>
+                      <tr>
+
+                        <th>
+                          <h5>
+                            <span class="badge bg-light-primary border border-primary hover-pointer"
+                              onclick="toggleAllCheckboxes()">
+                              ALL
+                          </h5>
+                          </span>
+                        </th>
+                        <th>
+                          <h5>
+                            <span class="badge bg-light-primary border border-primary hover-pointer"
+                              onclick="startTest()">
+                              START
+                          </h5>
+                          </span>
+                        </th>
+
+                        <th class="text-info">X<sup>2</sup> Test</th>
+                        <th class="text-info">KS-Test</th>
+                        <th class="text-info">Secuences</th>
+                        <th class="text-info">Approved</th>
+                        <th class="text-info">Proportion</th>
+                        <th class="text-info">Pass rate</th>
+                        <th class="text-info">Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><input type="checkbox" data-group="test-check" value="1" disabled></td>
+                        <td class="text-dark bold">Frequency</td>
+                        <td class="text-muted text-sm">
+                </div>
+                </td>
+                <td class="text-muted text-sm"></td>
+                <td class="text-muted text-sm"></td>
+                <td class="text-muted text-sm"></td>
+                <td class="text-muted text-sm"></td>
+                <td class="text-muted text-sm"></td>
+                <td class="text-muted text-sm"></td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" data-group="test-check" value="2" disabled></td>
+                  <td class="text-dark bold">Block Frequency</td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" data-group="test-check" value="3" disabled></td>
+                  <td><a href="#" class="text-dark bold">Cumulative Sums</a></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" data-group="test-check" value="4" disabled></td>
+                  <td><a href="#" class="text-dark bold">Runs</a></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" data-group="test-check" value="5" disabled></td>
+                  <td><a href="#" class="text-dark bold">Longest Run</a></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" data-group="test-check" value="6" disabled></td>
+                  <td><a href="#" class="text-dark bold">Rank</a></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" data-group="test-check" value="7" disabled></td>
+                  <td><a href="#" class="text-dark bold">FFT</a></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" data-group="test-check" value="8" disabled></td>
+                  <td><a href="#" class="text-dark bold">Non Overlapping Template</a></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" data-group="test-check" value="9" disabled></td>
+                  <td><a href="#" class="text-dark bold">Overlapping Template</a></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" data-group="test-check" value="10" disabled></td>
+                  <td><a href="#" class="text-dark bold">Universal</a></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" data-group="test-check" value="11" disabled></td>
+                  <td><a href="#" class="text-dark bold">Aproximate Entropy</a></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" data-group="test-check" value="12" disabled></td>
+                  <td><a href="#" class="text-dark bold">Random Excursions</a></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" data-group="test-check" value="13" disabled></td>
+                  <td><a href="#" class="text-dark bold">Random Excursions Variant</a></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" data-group="test-check" value="14" disabled></td>
+                  <td><a href="#" class="text-dark bold">Serial</a></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" data-group="test-check" value="15" disabled></td>
+                  <td><a href="#" class="text-dark bold">Linear Complexity</a></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                  <td class="text-muted text-sm"></td>
+                </tr>
+
+                </tbody>
+                </table>
+                <table id="actionsTable" align="right" cellpadding="10">
+                  <th>
+                    <h5>
+                      <span class="badge bg-light-primary border border-primary hover-pointer"
+                        onclick="downloadResults()">
+                        Download detailed results
+                    </h5>
+                    </span>
+                  </th>
+                  <th>
+                    <h5>
+                      <span class="badge bg-light-primary border border-primary hover-pointer"
+                        onclick="downloadTableAsCSV()">
+                        Download results
+                    </h5>
+                    </span>
+                  </th>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 col-xl-4">
+          <h6 class="text-muted">Activity log <i class="ti ti-trash hover-pointer" onclick="clearLog()"></i></h6>
+          <div class="card">
+            <div class="list-group list-group-flush">
+              <div id="logDiv"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-xl-8" id="entTest">
+          <h5 class="mb-3">Entropy Tests</h5><h5>
+            <span class="badge bg-light-primary border border-primary hover-pointer"
+              onclick="startEnt()">
+              START
+          </h5>
+          <div class="card">
+            <div class="card-body">
+              <h5 class="mb-1 f-w-500 text-warn "><pre><div id="entResults"></div></pre></h5>
+              <h3 class="mb-0"></h3>
+              <div id="sales-report-chart"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    </div>
+    <!-- [ Main Content ] end -->
+    <!-- [Page Specific JS] start -->
+    <!-- [Page Specific JS] end -->
+    <!-- Required Js -->
+    <script src="/static/assets/js/plugins/popper.min.js"></script>
+    <script src="/static/assets/js/plugins/simplebar.min.js"></script>
+    <script src="/static/assets/js/plugins/bootstrap.min.js"></script>
+    <script src="/static/assets/js/fonts/custom-font.js"></script>
+    <script src="/static/assets/js/fonts/custom-ant-icon.js"></script>
+    <script src="/static/assets/js/pcoded.js"></script>
+    <script src="/static/assets/js/plugins/feather.min.js"></script>
+    <script src="/static/script.js"></script>
+
+  </form>
+</body>
+<!-- [Body] end -->
+
+</html>

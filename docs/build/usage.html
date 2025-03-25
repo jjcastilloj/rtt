@@ -1,0 +1,320 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Usage Guide &mdash; NIST SP 800-22 Randomness Test Tool 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=f2a433a1"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Configuration Guide" href="configuration.html" />
+    <link rel="prev" title="Installation Guide" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            NIST SP 800-22 Randomness Test Tool
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation Guide</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Usage Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#getting-started">Getting Started</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#access-the-web-interface">1. Access the Web Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#initial-setup">2. Initial Setup</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#file-management">File Management</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#uploading-files">Uploading Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-sample-file">Using Sample File</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#running-tests">Running Tests</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#selecting-tests">Selecting Tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#test-parameters">Test Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#viewing-results">Viewing Results</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#test-results-display">Test Results Display</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#detailed-results">Detailed Results</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#entropy-analysis">Entropy Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#best-practices">Best Practices</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#file-preparation">File Preparation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#test-selection">Test Selection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#result-interpretation">Result Interpretation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#common-issues">Common Issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#getting-help">Getting Help</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">NIST SP 800-22 Randomness Test Tool</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Usage Guide</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/usage.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="usage-guide">
+<h1>Usage Guide<a class="headerlink" href="#usage-guide" title="Link to this heading"></a></h1>
+<p>This guide explains how to use the NIST SP 800-22 Randomness Test Tool effectively.</p>
+<section id="getting-started">
+<h2>Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading"></a></h2>
+<section id="access-the-web-interface">
+<h3>1. Access the Web Interface<a class="headerlink" href="#access-the-web-interface" title="Link to this heading"></a></h3>
+<p>Open your web browser and navigate to the application URL:
+<code class="docutils literal notranslate"><span class="pre">https://your_domain.com</span></code></p>
+</section>
+<section id="initial-setup">
+<h3>2. Initial Setup<a class="headerlink" href="#initial-setup" title="Link to this heading"></a></h3>
+<p>The first time you access the application:</p>
+<ul class="simple">
+<li><p>A new session will be automatically created</p></li>
+<li><p>The necessary directory structure will be set up</p></li>
+<li><p>You’ll be ready to upload files or use the sample file</p></li>
+</ul>
+</section>
+</section>
+<section id="file-management">
+<h2>File Management<a class="headerlink" href="#file-management" title="Link to this heading"></a></h2>
+<section id="uploading-files">
+<h3>Uploading Files<a class="headerlink" href="#uploading-files" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>Click the “Upload File” button</p></li>
+<li><p>Select your binary file</p></li>
+<li><p>Wait for the upload to complete</p></li>
+<li><p>Verify the file appears in the list</p></li>
+</ol>
+</section>
+<section id="using-sample-file">
+<h3>Using Sample File<a class="headerlink" href="#using-sample-file" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>Click “Use Sample File”</p></li>
+<li><p>The built-in pi.bin file will be loaded</p></li>
+<li><p>You can proceed with testing</p></li>
+</ol>
+</section>
+</section>
+<section id="running-tests">
+<h2>Running Tests<a class="headerlink" href="#running-tests" title="Link to this heading"></a></h2>
+<section id="selecting-tests">
+<h3>Selecting Tests<a class="headerlink" href="#selecting-tests" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>Choose the test(s) you want to run from the list</p></li>
+<li><p>Configure test parameters as needed</p></li>
+<li><p>Click “Run Tests”</p></li>
+</ol>
+</section>
+<section id="test-parameters">
+<h3>Test Parameters<a class="headerlink" href="#test-parameters" title="Link to this heading"></a></h3>
+<p>Common parameters for different tests:</p>
+<ul class="simple">
+<li><p>Block Frequency Test
+* Block Size
+* Number of Streams</p></li>
+<li><p>Non-overlapping Template Test
+* Template Length
+* Number of Streams</p></li>
+<li><p>Overlapping Template Test
+* Template Length
+* Number of Streams</p></li>
+<li><p>Approximate Entropy Test
+* Block Length
+* Number of Streams</p></li>
+<li><p>Serial Test
+* Block Length
+* Number of Streams</p></li>
+<li><p>Linear Complexity Test
+* Block Length
+* Number of Streams</p></li>
+</ul>
+</section>
+</section>
+<section id="viewing-results">
+<h2>Viewing Results<a class="headerlink" href="#viewing-results" title="Link to this heading"></a></h2>
+<section id="test-results-display">
+<h3>Test Results Display<a class="headerlink" href="#test-results-display" title="Link to this heading"></a></h3>
+<p>Results are displayed in a table format showing:</p>
+<ul class="simple">
+<li><p>Test Name</p></li>
+<li><p>Chi-square Value</p></li>
+<li><p>Kolmogorov-Smirnov Value</p></li>
+<li><p>Number of Approved Sequences</p></li>
+<li><p>Total Number of Sequences</p></li>
+<li><p>Proportion</p></li>
+<li><p>Pass Rate</p></li>
+<li><p>Overall Result (PASS/FAIL)</p></li>
+</ul>
+</section>
+<section id="detailed-results">
+<h3>Detailed Results<a class="headerlink" href="#detailed-results" title="Link to this heading"></a></h3>
+<p>For detailed results:</p>
+<ol class="arabic simple">
+<li><p>Select the tests you want to analyze</p></li>
+<li><p>Click “Download Results”</p></li>
+<li><p>A compressed file containing detailed results will be downloaded</p></li>
+</ol>
+</section>
+</section>
+<section id="entropy-analysis">
+<h2>Entropy Analysis<a class="headerlink" href="#entropy-analysis" title="Link to this heading"></a></h2>
+<p>To analyze the entropy of your binary file:</p>
+<ol class="arabic simple">
+<li><p>Upload your file or use the sample file</p></li>
+<li><p>Click “Run Entropy Analysis”</p></li>
+<li><p>View the entropy statistics including:</p>
+<ul class="simple">
+<li><p>Entropy</p></li>
+<li><p>Chi-square Distribution</p></li>
+<li><p>Arithmetic Mean</p></li>
+<li><p>Monte Carlo Value for Pi</p></li>
+<li><p>Serial Correlation Coefficient</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="best-practices">
+<h2>Best Practices<a class="headerlink" href="#best-practices" title="Link to this heading"></a></h2>
+<section id="file-preparation">
+<h3>File Preparation<a class="headerlink" href="#file-preparation" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>Ensure your binary file is properly formatted</p></li>
+<li><p>Use appropriate file sizes (recommended: 1MB or larger)</p></li>
+<li><p>Verify file integrity before uploading</p></li>
+</ol>
+</section>
+<section id="test-selection">
+<h3>Test Selection<a class="headerlink" href="#test-selection" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>Start with basic tests (Frequency, Runs)</p></li>
+<li><p>Progress to more complex tests</p></li>
+<li><p>Consider your specific use case when selecting tests</p></li>
+</ol>
+</section>
+<section id="result-interpretation">
+<h3>Result Interpretation<a class="headerlink" href="#result-interpretation" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>Consider multiple test results together</p></li>
+<li><p>Pay attention to proportions and pass rates</p></li>
+<li><p>Look for patterns in failed tests</p></li>
+<li><p>Use entropy analysis as a complementary tool</p></li>
+</ol>
+</section>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading"></a></h2>
+<section id="common-issues">
+<h3>Common Issues<a class="headerlink" href="#common-issues" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>File Upload Failures
+* Check file size limits
+* Verify file format
+* Ensure proper permissions</p></li>
+<li><p>Test Execution Errors
+* Verify test parameters
+* Check file integrity
+* Review error messages</p></li>
+<li><p>Result Interpretation
+* Consider test dependencies
+* Review test documentation
+* Consult NIST guidelines</p></li>
+</ol>
+</section>
+<section id="getting-help">
+<h3>Getting Help<a class="headerlink" href="#getting-help" title="Link to this heading"></a></h3>
+<p>If you encounter issues:</p>
+<ol class="arabic simple">
+<li><p>Check the application logs</p></li>
+<li><p>Review the test documentation</p></li>
+<li><p>Consult the NIST SP 800-22 specification</p></li>
+<li><p>Contact system administrator</p></li>
+</ol>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="configuration.html" class="btn btn-neutral float-right" title="Configuration Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, NIST.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,13 @@
+[Unit]
+Description=Gunicorn instance to serve NIST Tests
+After=network.target
+
+[Service]
+User=jcastillo
+Group=jcastillo
+WorkingDirectory=/opt/web_app
+ExecStart=/home/jcastillo/nist/env-nist-tests/bin/gunicorn -k gthread --workers=9 --threads=4 --timeout=120 --bind 0.0.0.0:8000 wsgi:app
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

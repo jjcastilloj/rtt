@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NIST Randomness Testing Tool</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">NIST Randomness Testing Tool</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/docs" target="_blank">Documentation</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Welcome to NIST Randomness Testing Tool</h1>
+                <p class="lead">A web-based application for performing statistical tests on binary random number sequences.</p>
+                
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Documentation</h5>
+                        <p class="card-text">For detailed information about using the NIST Randomness Testing Tool, please visit our comprehensive documentation.</p>
+                        <a href="/docs" class="btn btn-primary" target="_blank">View Documentation</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Get Started</h5>
+                        <p class="card-text">Upload a binary file or use our sample file to begin testing.</p>
+                        <div class="mb-3">
+                            <input type="file" class="form-control" id="fileInput" accept=".bin,.txt">
+                        </div>
+                        <button class="btn btn-success" onclick="uploadFile()">Upload File</button>
+                        <button class="btn btn-secondary" onclick="useSampleFile()">Use Sample File</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html> 

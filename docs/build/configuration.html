@@ -1,0 +1,443 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Configuration Guide &mdash; NIST SP 800-22 Randomness Test Tool 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=f2a433a1"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Usage Guide" href="usage.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            NIST SP 800-22 Randomness Test Tool
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage Guide</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Configuration Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#application-configuration">Application Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#session-management">Session Management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cookie-settings">Cookie Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#file-management">File Management</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#nginx-configuration">Nginx Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#basic-configuration">Basic Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ssl-configuration">SSL Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#security-settings">Security Settings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#file-permissions">File Permissions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#redis-configuration">Redis Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#basic-settings">Basic Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Security Settings</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#environment-variables">Environment Variables</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#required-variables">Required Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#optional-variables">Optional Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#test-configuration">Test Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#default-parameters">Default Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#test-selection">Test Selection</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#logging-configuration">Logging Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#application-logs">Application Logs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nginx-logs">Nginx Logs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#performance-tuning">Performance Tuning</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#gunicorn-settings">Gunicorn Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#redis-optimization">Redis Optimization</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#monitoring">Monitoring</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#system-monitoring">System Monitoring</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#log-monitoring">Log Monitoring</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#backup-configuration">Backup Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#file-backups">File Backups</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#database-backups">Database Backups</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">NIST SP 800-22 Randomness Test Tool</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Configuration Guide</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/configuration.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="configuration-guide">
+<h1>Configuration Guide<a class="headerlink" href="#configuration-guide" title="Link to this heading"></a></h1>
+<p>This guide explains how to configure the NIST SP 800-22 Randomness Test Tool.</p>
+<section id="application-configuration">
+<h2>Application Configuration<a class="headerlink" href="#application-configuration" title="Link to this heading"></a></h2>
+<section id="session-management">
+<h3>Session Management<a class="headerlink" href="#session-management" title="Link to this heading"></a></h3>
+<p>The application uses Redis for session management. Configure the following settings in <code class="docutils literal notranslate"><span class="pre">app.py</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;SESSION_TYPE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;redis&#39;</span>
+<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;SECRET_KEY&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;your_secret_key&#39;</span>
+<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;SESSION_USE_SIGNER&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;SESSION_KEY_PREFIX&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;rtt:&#39;</span>
+<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;SESSION_REDIS&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">redis</span><span class="o">.</span><span class="n">Redis</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s1">&#39;localhost&#39;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">6379</span><span class="p">,</span> <span class="n">db</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;SESSION_PERMANENT&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;PERMANENT_SESSION_LIFETIME&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">minutes</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="cookie-settings">
+<h3>Cookie Settings<a class="headerlink" href="#cookie-settings" title="Link to this heading"></a></h3>
+<p>Configure cookie security settings:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;PREFERRED_URL_SCHEME&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;https&#39;</span>
+<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;SESSION_COOKIE_SAMESITE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Lax&#39;</span>
+<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;SESSION_COOKIE_SECURE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;SESSION_COOKIE_HTTPONLY&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;SESSION_COOKIE_PATH&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;/&#39;</span>
+</pre></div>
+</div>
+</section>
+<section id="file-management">
+<h3>File Management<a class="headerlink" href="#file-management" title="Link to this heading"></a></h3>
+<p>Configure file storage settings:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">APP_ROOT</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
+<span class="n">USER_FILES_DIR</span> <span class="o">=</span> <span class="s1">&#39;/tmp/rtt&#39;</span>
+<span class="n">ALLOWED_EXTENSIONS</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;tar&#39;</span><span class="p">,</span> <span class="s1">&#39;png&#39;</span><span class="p">,</span> <span class="s1">&#39;jpg&#39;</span><span class="p">,</span> <span class="s1">&#39;jpeg&#39;</span><span class="p">,</span> <span class="s1">&#39;gif&#39;</span><span class="p">,</span> <span class="s1">&#39;bin&#39;</span><span class="p">,</span> <span class="s1">&#39;txt&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="nginx-configuration">
+<h2>Nginx Configuration<a class="headerlink" href="#nginx-configuration" title="Link to this heading"></a></h2>
+<section id="basic-configuration">
+<h3>Basic Configuration<a class="headerlink" href="#basic-configuration" title="Link to this heading"></a></h3>
+<div class="highlight-nginx notranslate"><div class="highlight"><pre><span></span><span class="k">server</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kn">listen</span><span class="w"> </span><span class="mi">443</span><span class="w"> </span><span class="s">ssl</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">server_name</span><span class="w"> </span><span class="s">your_domain.com</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kn">ssl_certificate</span><span class="w"> </span><span class="s">/path/to/cert.pem</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">ssl_certificate_key</span><span class="w"> </span><span class="s">/path/to/key.pem</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kn">location</span><span class="w"> </span><span class="s">/</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kn">proxy_pass</span><span class="w"> </span><span class="s">http://localhost:8000</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">Host</span><span class="w"> </span><span class="nv">$host</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">X-Real-IP</span><span class="w"> </span><span class="nv">$remote_addr</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">X-Forwarded-For</span><span class="w"> </span><span class="nv">$proxy_add_x_forwarded_for</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">X-Forwarded-Proto</span><span class="w"> </span><span class="nv">$scheme</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kn">location</span><span class="w"> </span><span class="s">/static</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kn">alias</span><span class="w"> </span><span class="s">/path/to/web_app/static</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="ssl-configuration">
+<h3>SSL Configuration<a class="headerlink" href="#ssl-configuration" title="Link to this heading"></a></h3>
+<p>For secure HTTPS connections:</p>
+<ol class="arabic simple">
+<li><p>Obtain SSL certificates</p></li>
+<li><p>Configure SSL parameters:</p></li>
+</ol>
+<div class="highlight-nginx notranslate"><div class="highlight"><pre><span></span><span class="k">ssl_protocols</span><span class="w"> </span><span class="s">TLSv1.2</span><span class="w"> </span><span class="s">TLSv1.3</span><span class="p">;</span>
+<span class="k">ssl_ciphers</span><span class="w"> </span><span class="s">HIGH:!aNULL:!MD5</span><span class="p">;</span>
+<span class="k">ssl_prefer_server_ciphers</span><span class="w"> </span><span class="no">on</span><span class="p">;</span>
+<span class="k">ssl_session_cache</span><span class="w"> </span><span class="s">shared:SSL:10m</span><span class="p">;</span>
+<span class="k">ssl_session_timeout</span><span class="w"> </span><span class="mi">10m</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="security-settings">
+<h2>Security Settings<a class="headerlink" href="#security-settings" title="Link to this heading"></a></h2>
+<section id="file-permissions">
+<h3>File Permissions<a class="headerlink" href="#file-permissions" title="Link to this heading"></a></h3>
+<p>Set appropriate file permissions:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>chown<span class="w"> </span>-R<span class="w"> </span><span class="nv">$USER</span>:<span class="nv">$USER</span><span class="w"> </span>/tmp/rtt
+chmod<span class="w"> </span><span class="m">755</span><span class="w"> </span>/tmp/rtt
+chmod<span class="w"> </span><span class="m">644</span><span class="w"> </span>/tmp/rtt/*
+</pre></div>
+</div>
+</section>
+</section>
+<section id="redis-configuration">
+<h2>Redis Configuration<a class="headerlink" href="#redis-configuration" title="Link to this heading"></a></h2>
+<section id="basic-settings">
+<h3>Basic Settings<a class="headerlink" href="#basic-settings" title="Link to this heading"></a></h3>
+<p>Configure Redis in <code class="docutils literal notranslate"><span class="pre">/etc/redis/redis.conf</span></code>:</p>
+<div class="highlight-conf notranslate"><div class="highlight"><pre><span></span>bind 127.0.0.1
+port 6379
+requirepass your_redis_password
+maxmemory 2gb
+maxmemory-policy allkeys-lru
+</pre></div>
+</div>
+</section>
+<section id="id1">
+<h3>Security Settings<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>Enable password protection</p></li>
+<li><p>Restrict network access</p></li>
+<li><p>Configure memory limits</p></li>
+<li><p>Set up persistence</p></li>
+</ol>
+</section>
+</section>
+<section id="environment-variables">
+<h2>Environment Variables<a class="headerlink" href="#environment-variables" title="Link to this heading"></a></h2>
+<section id="required-variables">
+<h3>Required Variables<a class="headerlink" href="#required-variables" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">FLASK_APP</span><span class="o">=</span>web_app/app.py
+<span class="nb">export</span><span class="w"> </span><span class="nv">FLASK_ENV</span><span class="o">=</span>production
+<span class="nb">export</span><span class="w"> </span><span class="nv">SECRET_KEY</span><span class="o">=</span>your_secret_key
+<span class="nb">export</span><span class="w"> </span><span class="nv">REDIS_URL</span><span class="o">=</span>redis://localhost:6379/0
+</pre></div>
+</div>
+</section>
+<section id="optional-variables">
+<h3>Optional Variables<a class="headerlink" href="#optional-variables" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">MAX_CONTENT_LENGTH</span><span class="o">=</span><span class="m">16777216</span><span class="w">  </span><span class="c1"># 16MB</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">UPLOAD_FOLDER</span><span class="o">=</span>/tmp/rtt
+<span class="nb">export</span><span class="w"> </span><span class="nv">ALLOWED_EXTENSIONS</span><span class="o">=</span>bin,txt,tar
+</pre></div>
+</div>
+</section>
+</section>
+<section id="test-configuration">
+<h2>Test Configuration<a class="headerlink" href="#test-configuration" title="Link to this heading"></a></h2>
+<section id="default-parameters">
+<h3>Default Parameters<a class="headerlink" href="#default-parameters" title="Link to this heading"></a></h3>
+<p>Configure default test parameters in the application:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">DEFAULT_TEST_PARAMS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;blockFreq&#39;</span><span class="p">:</span> <span class="mi">128</span><span class="p">,</span>
+    <span class="s1">&#39;blockNon&#39;</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span>
+    <span class="s1">&#39;blockOver&#39;</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span>
+    <span class="s1">&#39;blockApprox&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="s1">&#39;blockSerial&#39;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+    <span class="s1">&#39;blockLinear&#39;</span><span class="p">:</span> <span class="mi">500</span><span class="p">,</span>
+    <span class="s1">&#39;secNum&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="s1">&#39;secSize&#39;</span><span class="p">:</span> <span class="mi">1000000</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="test-selection">
+<h3>Test Selection<a class="headerlink" href="#test-selection" title="Link to this heading"></a></h3>
+<p>Configure available tests:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">nist_test</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;Frequency&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;BlockFrequency&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CumulativeSums&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Runs&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;LongestRun&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Rank&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;FFT&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;NonOverlappingTemplate&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;OverlappingTemplate&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Universal&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ApproximateEntropy&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;RandomExcursions&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;RandomExcursionsVariant&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Serial&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;LinearComplexity&quot;</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="logging-configuration">
+<h2>Logging Configuration<a class="headerlink" href="#logging-configuration" title="Link to this heading"></a></h2>
+<section id="application-logs">
+<h3>Application Logs<a class="headerlink" href="#application-logs" title="Link to this heading"></a></h3>
+<p>Configure logging in <code class="docutils literal notranslate"><span class="pre">app.py</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span>
+    <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;app.log&#39;</span><span class="p">,</span>
+    <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span>
+    <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%(asctime)s</span><span class="s1"> - </span><span class="si">%(name)s</span><span class="s1"> - </span><span class="si">%(levelname)s</span><span class="s1"> - </span><span class="si">%(message)s</span><span class="s1">&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="nginx-logs">
+<h3>Nginx Logs<a class="headerlink" href="#nginx-logs" title="Link to this heading"></a></h3>
+<p>Configure Nginx logging in <code class="docutils literal notranslate"><span class="pre">/etc/nginx/nginx.conf</span></code>:</p>
+<div class="highlight-nginx notranslate"><div class="highlight"><pre><span></span><span class="k">access_log</span><span class="w"> </span><span class="s">/var/log/nginx/access.log</span><span class="w"> </span><span class="s">combined</span><span class="w"> </span><span class="s">buffer=512k</span><span class="w"> </span><span class="s">flush=1m</span><span class="p">;</span>
+<span class="k">error_log</span><span class="w"> </span><span class="s">/var/log/nginx/error.log</span><span class="w"> </span><span class="s">warn</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="performance-tuning">
+<h2>Performance Tuning<a class="headerlink" href="#performance-tuning" title="Link to this heading"></a></h2>
+<section id="gunicorn-settings">
+<h3>Gunicorn Settings<a class="headerlink" href="#gunicorn-settings" title="Link to this heading"></a></h3>
+<p>Configure Gunicorn for optimal performance:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gunicorn<span class="w"> </span>-w<span class="w"> </span><span class="m">4</span><span class="w"> </span>-b<span class="w"> </span><span class="m">127</span>.0.0.1:8000<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--timeout<span class="w"> </span><span class="m">120</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--keep-alive<span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--log-level<span class="w"> </span>info<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--access-logfile<span class="w"> </span>/var/log/gunicorn/access.log<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--error-logfile<span class="w"> </span>/var/log/gunicorn/error.log<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>web_app.app:app
+</pre></div>
+</div>
+</section>
+<section id="redis-optimization">
+<h3>Redis Optimization<a class="headerlink" href="#redis-optimization" title="Link to this heading"></a></h3>
+<p>Configure Redis for better performance:</p>
+<div class="highlight-conf notranslate"><div class="highlight"><pre><span></span>maxmemory 2gb
+maxmemory-policy allkeys-lru
+appendonly yes
+appendfsync everysec
+no-appendfsync-on-rewrite yes
+auto-aof-rewrite-percentage 100
+auto-aof-rewrite-min-size 64mb
+</pre></div>
+</div>
+</section>
+</section>
+<section id="monitoring">
+<h2>Monitoring<a class="headerlink" href="#monitoring" title="Link to this heading"></a></h2>
+<section id="system-monitoring">
+<h3>System Monitoring<a class="headerlink" href="#system-monitoring" title="Link to this heading"></a></h3>
+<p>Set up monitoring tools:</p>
+<ol class="arabic simple">
+<li><p>System metrics (CPU, memory, disk)</p></li>
+<li><p>Application metrics (requests, response times)</p></li>
+<li><p>Redis metrics (memory usage, connections)</p></li>
+<li><p>Nginx metrics (requests, errors)</p></li>
+</ol>
+</section>
+<section id="log-monitoring">
+<h3>Log Monitoring<a class="headerlink" href="#log-monitoring" title="Link to this heading"></a></h3>
+<p>Configure log monitoring:</p>
+<ol class="arabic simple">
+<li><p>Application logs</p></li>
+<li><p>Nginx access logs</p></li>
+<li><p>Nginx error logs</p></li>
+<li><p>Redis logs</p></li>
+<li><p>System logs</p></li>
+</ol>
+</section>
+</section>
+<section id="backup-configuration">
+<h2>Backup Configuration<a class="headerlink" href="#backup-configuration" title="Link to this heading"></a></h2>
+<section id="file-backups">
+<h3>File Backups<a class="headerlink" href="#file-backups" title="Link to this heading"></a></h3>
+<p>Configure backup strategy:</p>
+<ol class="arabic simple">
+<li><p>Regular backups of:
+* Application files
+* Configuration files
+* User data
+* Test results</p></li>
+<li><p>Backup schedule:
+* Daily incremental backups
+* Weekly full backups
+* Monthly archives</p></li>
+</ol>
+</section>
+<section id="database-backups">
+<h3>Database Backups<a class="headerlink" href="#database-backups" title="Link to this heading"></a></h3>
+<p>For Redis data:</p>
+<ol class="arabic simple">
+<li><p>Enable AOF persistence</p></li>
+<li><p>Configure RDB snapshots</p></li>
+<li><p>Set up backup schedule</p></li>
+<li><p>Test backup restoration</p></li>
+</ol>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="usage.html" class="btn btn-neutral float-left" title="Usage Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, NIST.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

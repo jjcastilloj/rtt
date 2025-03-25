@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- [Head] start -->
+<head>
+  <title>User Manual - Randomness Test Tool</title>
+  <!-- [Meta] -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="User Manual for the NIST SP 800-22 Randomness Test Tool">
+  <meta name="keywords" content="NIST, Randomness Test, User Manual, SP 800-22">
+  <meta name="author" content="CodedThemes">
+
+  <!-- [Favicon] icon -->
+  <link rel="icon" href="/static/assets/images/random.png" type="image/x-icon">
+  <!-- [Google Font] Family -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&display=swap" id="main-font-link">
+  <!-- [Tabler Icons] https://tablericons.com -->
+  <link rel="stylesheet" href="/static/assets/fonts/tabler-icons.min.css">
+  <!-- [Feather Icons] https://feathericons.com -->
+  <link rel="stylesheet" href="/static/assets/fonts/feather.css">
+  <!-- [Font Awesome Icons] https://fontawesome.com/icons -->
+  <link rel="stylesheet" href="/static/assets/fonts/fontawesome.css">
+  <!-- [Material Icons] https://fonts.google.com/icons -->
+  <link rel="stylesheet" href="/static/assets/fonts/material.css">
+  <!-- [Template CSS Files] -->
+  <link rel="stylesheet" href="/static/assets/css/style.css" id="main-style-link">
+  <link rel="stylesheet" href="/static/assets/css/style-preset.css">
+  <link rel="stylesheet" href="/static/styles.css">
+  <style>
+    .pc-container {
+      margin-left: 0 !important;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    .pc-content {
+      margin-left: 0 !important;
+    }
+    .pc-header {
+      width: 100% !important;
+      left: 0 !important;
+    }
+  </style>
+</head>
+<!-- [Head] end -->
+<!-- [Body] Start -->
+<body data-pc-preset="preset-1" data-pc-direction="ltr" data-pc-theme="light">
+  <!-- [ Pre-loader ] start -->
+  <div class="loader-bg">
+    <div class="loader-track">
+      <div class="loader-fill"></div>
+    </div>
+  </div>
+  <!-- [ Pre-loader ] End -->
+  <!-- [ Header Topbar ] start -->
+  <header class="pc-header">
+    <div class="header-wrapper">
+      <img src="/static/assets/images/randomness.png" width="300" height="40">
+      <div class="header-description mt-2">
+        <p class="text-muted mb-0">
+          This manual provides detailed information about how to use the NIST SP 800-22 Randomness Test Tool, 
+          including explanations of each test, input parameters, and how to interpret the results.
+        </p>
+      </div>
+    </div>
+  </header>
+  <!-- [ Header ] end -->
+
+  <!-- [ Main Content ] start -->
+  <div class="pc-container">
+    <div class="pc-content">
+      <div class="row" style="margin-top: 20px;">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex align-items-center mb-4">
+                <i class="ti ti-book-2 text-primary me-2" style="font-size: 2rem;"></i>
+                <h4 class="mb-0">User Manual</h4>
+              </div>
+              
+              <div class="manual-section mb-5">
+                <div class="d-flex align-items-center mb-3">
+                  <i class="ti ti-rocket text-primary me-2"></i>
+                  <h5 class="mb-0">1. Getting Started</h5>
+                </div>
+                <div class="ms-4">
+                  <p class="text-muted">
+                    The NIST SP 800-22 Randomness Test Tool is designed to evaluate the randomness of binary sequences using a comprehensive set of statistical tests.
+                    To begin using the tool:
+                  </p>
+                  <ol class="text-muted">
+                    <li class="mb-2">Upload a binary file containing the sequence to be tested</li>
+                    <li class="mb-2">Configure the test parameters (sequence size and number of sequences)</li>
+                    <li class="mb-2">Select the tests you want to run</li>
+                    <li>Click the START button to begin the analysis</li>
+                  </ol>
+                  <div class="alert alert-info mt-3">
+                    <i class="ti ti-info-circle me-2"></i>
+                    <strong>Quick Start:</strong> You can use the sample binary file included in the application by clicking on the "Load sample binary random file" option in the Options section.
+                  </div>
+                </div>
+              </div>
+
+              <div class="manual-section mb-5">
+                <div class="d-flex align-items-center mb-3">
+                  <i class="ti ti-settings text-primary me-2"></i>
+                  <h5 class="mb-0">2. Input Parameters</h5>
+                </div>
+                <div class="ms-4">
+                  <div class="mb-4">
+                    <h6 class="text-primary">Sequence Size (bits)</h6>
+                    <p class="text-muted">
+                      This parameter determines the size of each sequence to be tested. The recommended value is 1,000,000 bits.
+                      This value should be large enough to provide statistically significant results.
+                    </p>
+                  </div>
+
+                  <div class="mb-4">
+                    <h6 class="text-primary">Number of Sequences</h6>
+                    <p class="text-muted">
+                      This parameter specifies how many sequences will be tested. The recommended value is greater than 100.
+                      More sequences provide more reliable statistical results.
+                    </p>
+                  </div>
+
+                  <div>
+                    <h6 class="text-primary">Block Sizes</h6>
+                    <p class="text-muted mb-3">
+                      Some tests require specific block sizes for their analysis. The application includes recommended values for these parameters:
+                    </p>
+                    <div class="table-responsive">
+                      <table class="table table-bordered">
+                        <thead class="table-light">
+                          <tr>
+                            <th>Test</th>
+                            <th>Default Block Size</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td><strong>Block Frequency</strong></td>
+                            <td>128</td>
+                          </tr>
+                          <tr>
+                            <td><strong>Non Overlapping Template</strong></td>
+                            <td>9</td>
+                          </tr>
+                          <tr>
+                            <td><strong>Overlapping Template</strong></td>
+                            <td>9</td>
+                          </tr>
+                          <tr>
+                            <td><strong>Approximate Entropy</strong></td>
+                            <td>10</td>
+                          </tr>
+                          <tr>
+                            <td><strong>Serial Test</strong></td>
+                            <td>16</td>
+                          </tr>
+                          <tr>
+                            <td><strong>Linear Complexity</strong></td>
+                            <td>500</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="alert alert-info mt-3">
+                      <i class="ti ti-info-circle me-2"></i>
+                      You can load these recommended values automatically by clicking on the "Enter block size values manually" option in the Options section.
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="manual-section mb-5">
+                <div class="d-flex align-items-center mb-3">
+                  <i class="ti ti-clipboard-list text-primary me-2"></i>
+                  <h5 class="mb-0">3. Available Tests</h5>
+                </div>
+                <div class="ms-4">
+                  <p class="text-muted mb-3">The tool includes the following statistical tests:</p>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <ul class="list-unstyled">
+                        <li class="mb-2"><i class="ti ti-check text-success me-2"></i><strong>Frequency Test:</strong> Evaluates the proportion of 0s and 1s</li>
+                        <li class="mb-2"><i class="ti ti-check text-success me-2"></i><strong>Block Frequency Test:</strong> Analyzes frequency in blocks</li>
+                        <li class="mb-2"><i class="ti ti-check text-success me-2"></i><strong>Cumulative Sums Test:</strong> Examines maximum deviation</li>
+                        <li class="mb-2"><i class="ti ti-check text-success me-2"></i><strong>Runs Test:</strong> Evaluates oscillation patterns</li>
+                        <li class="mb-2"><i class="ti ti-check text-success me-2"></i><strong>Longest Run Test:</strong> Analyzes consecutive sequences</li>
+                        <li class="mb-2"><i class="ti ti-check text-success me-2"></i><strong>Rank Test:</strong> Checks linear dependence</li>
+                        <li class="mb-2"><i class="ti ti-check text-success me-2"></i><strong>FFT Test:</strong> Detects periodic features</li>
+                      </ul>
+                    </div>
+                    <div class="col-md-6">
+                      <ul class="list-unstyled">
+                        <li class="mb-2"><i class="ti ti-check text-success me-2"></i><strong>Non-overlapping Template:</strong> Pattern occurrence analysis</li>
+                        <li class="mb-2"><i class="ti ti-check text-success me-2"></i><strong>Overlapping Template:</strong> Overlapping pattern analysis</li>
+                        <li class="mb-2"><i class="ti ti-check text-success me-2"></i><strong>Universal Test:</strong> Sequence compressibility</li>
+                        <li class="mb-2"><i class="ti ti-check text-success me-2"></i><strong>Approximate Entropy:</strong> Pattern frequency analysis</li>
+                        <li class="mb-2"><i class="ti ti-check text-success me-2"></i><strong>Random Excursions:</strong> State visit analysis</li>
+                        <li class="mb-2"><i class="ti ti-check text-success me-2"></i><strong>Random Excursions Variant:</strong> State frequency analysis</li>
+                        <li class="mb-2"><i class="ti ti-check text-success me-2"></i><strong>Linear Complexity:</strong> Sequence complexity evaluation</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="manual-section mb-5">
+                <div class="d-flex align-items-center mb-3">
+                  <i class="ti ti-chart-bar text-primary me-2"></i>
+                  <h5 class="mb-0">4. Interpreting Results</h5>
+                </div>
+                <div class="ms-4">
+                  <p class="text-muted mb-3">For each test, the tool provides:</p>
+                  <div class="table-responsive">
+                    <table class="table table-bordered">
+                      <thead class="table-light">
+                        <tr>
+                          <th>Metric</th>
+                          <th>Description</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td><strong>X² Test</strong></td>
+                          <td>Chi-square statistic for the test</td>
+                        </tr>
+                        <tr>
+                          <td><strong>KS-Test</strong></td>
+                          <td>Kolmogorov-Smirnov test statistic</td>
+                        </tr>
+                        <tr>
+                          <td><strong>Sequences</strong></td>
+                          <td>Number of sequences tested</td>
+                        </tr>
+                        <tr>
+                          <td><strong>Approved</strong></td>
+                          <td>Number of sequences that passed</td>
+                        </tr>
+                        <tr>
+                          <td><strong>Proportion</strong></td>
+                          <td>Ratio of approved to total sequences</td>
+                        </tr>
+                        <tr>
+                          <td><strong>Pass Rate</strong></td>
+                          <td>Overall pass rate for the test</td>
+                        </tr>
+                        <tr>
+                          <td><strong>Status</strong></td>
+                          <td>Final status (PASS/FAIL)</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+              <div class="manual-section mb-5">
+                <div class="d-flex align-items-center mb-3">
+                  <i class="ti ti-grain text-primary me-2"></i>
+                  <h5 class="mb-0">5. Entropy Tests</h5>
+                </div>
+                <div class="ms-4">
+                  <p class="text-muted">
+                    The tool includes entropy tests that measure the randomness of the sequence using different entropy metrics.
+                    These tests provide additional insights into the quality of the random number generator.
+                  </p>
+                </div>
+              </div>
+
+              <div class="manual-section mb-5">
+                <div class="d-flex align-items-center mb-3">
+                  <i class="ti ti-download text-primary me-2"></i>
+                  <h5 class="mb-0">6. Exporting Results</h5>
+                </div>
+                <div class="ms-4">
+                  <p class="text-muted mb-3">You can export the test results in two formats:</p>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="card bg-light">
+                        <div class="card-body">
+                          <h6 class="text-primary"><i class="ti ti-file-text me-2"></i>Detailed Results</h6>
+                          <p class="text-muted mb-0">Provides comprehensive information about each test</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="card bg-light">
+                        <div class="card-body">
+                          <h6 class="text-primary"><i class="ti ti-file-spreadsheet me-2"></i>CSV Results</h6>
+                          <p class="text-muted mb-0">Exports a simplified CSV format of the results</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="manual-section">
+                <div class="d-flex align-items-center mb-3">
+                  <i class="ti ti-clipboard text-primary me-2"></i>
+                  <h5 class="mb-0">7. Activity Log</h5>
+                </div>
+                <div class="ms-4">
+                  <p class="text-muted mb-3">The activity log shows real-time information about the test execution:</p>
+                  <div class="card bg-light">
+                    <div class="card-body">
+                      <ul class="list-unstyled mb-0">
+                        <li class="mb-2"><i class="ti ti-circle-dot text-primary me-2"></i>Test progress</li>
+                        <li class="mb-2"><i class="ti ti-alert-triangle text-warning me-2"></i>Warnings and errors</li>
+                        <li><i class="ti ti-check-circle text-success me-2"></i>Completion status</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <p class="text-muted mt-3">
+                    You can clear the log using the trash icon next to the "Activity log" heading.
+                  </p>
+                </div>
+              </div>
+
+              <div class="manual-section mt-5">
+                <div class="d-flex align-items-center mb-3">
+                  <i class="ti ti-user text-primary me-2"></i>
+                  <h5 class="mb-0">8. Contact & Credits</h5>
+                </div>
+                <div class="ms-4">
+                  <div class="card bg-light">
+                    <div class="card-body">
+                      <div class="d-flex align-items-center mb-3">
+                        <i class="ti ti-code me-2 text-primary"></i>
+                        <h6 class="mb-0">Developer</h6>
+                      </div>
+                      <p class="text-muted mb-2">
+                        This tool uses the Fast NIST implementation from Zdenek Říha (zriha@fi.muni.cz) and
+                        Marek Sýs (syso@mail.muni.cz) as a backend application. 
+                        The frontend and Python interface was developed by Juan C. Castillo E.
+                      </p>
+                      <p class="text-muted mb-0">
+                        <i class="ti ti-mail me-2"></i>
+                        <a href="mailto:jjcastilloj@gmail.com" class="text-primary">jjcastilloj@gmail.com</a>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- [ Main Content ] end -->
+  <!-- Required Js -->
+  <script src="/static/assets/js/plugins/popper.min.js"></script>
+  <script src="/static/assets/js/plugins/simplebar.min.js"></script>
+  <script src="/static/assets/js/plugins/bootstrap.min.js"></script>
+  <script src="/static/assets/js/fonts/custom-font.js"></script>
+  <script src="/static/assets/js/fonts/custom-ant-icon.js"></script>
+  <script src="/static/assets/js/pcoded.js"></script>
+  <script src="/static/assets/js/plugins/feather.min.js"></script>
+</body>
+<!-- [Body] end -->
+</html> 
