@@ -277,7 +277,7 @@ function uploadFile() {
     const formData = new FormData();
     formData.append('file', fileInput.files[0]);
 
-    addLogMessage("Uploading file: " + selectedFileName);
+    addLogMessage("Uploading file: " + selectedFileName + "...");
 
     fetch('/api/upload', {
         method: 'POST',
@@ -356,7 +356,7 @@ async function startTest() {
         const tests = document.querySelectorAll('input[type="checkbox"]');
 
         if(!selectedFileName.includes('pi.bin')){
-            if (secSize * secNum > selectedFileSize) {
+            if (secSize * secNum > selectedFileSize * 8) {
                 addLogMessage("Insufficient data in file");
                 return;
             }
@@ -389,7 +389,7 @@ async function startTest() {
             return;
         }
 
-        addLogMessage("Processing data");
+        addLogMessage("Running NIST tests...");
         document.getElementById("actionsTable").style.display = "none";
 
         tests.forEach(checkbox => {
@@ -422,10 +422,10 @@ async function startTest() {
                         updateTable(data['test'], 6, data['proportion']);
                         updateTable(data['test'], 7, data['passrate']);
 
-                        if (data['result'] == "PASS") {
+                        if (data['result'] == "SUCCESS") {
                             circleColor = "text-success";
                         }
-                        else if (data['result'] == "FAIL") {
+                        else if (data['result'] == "FAILURE") {
                             circleColor = "text-danger";
                         }
                         else {
@@ -456,7 +456,7 @@ async function startTest() {
             clearTable();
         }
         else {
-            addLogMessage("Completed");
+            addLogMessage("NIST tests completed");
             document.getElementById("actionsTable").style.display = "table";
         }
 
@@ -610,7 +610,7 @@ function startEnt(){
         addLogMessage("Please select file");
         return;
     }
-    addLogMessage("Processing entropy test");
+    addLogMessage("Running entropy test...");
     entResults.textContent = "Test in progress. This may take several seconds, please wait...";
 
     fetch('/api/ent', {

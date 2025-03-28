@@ -311,7 +311,7 @@ def fit_test(data_column: pd.Series):
     proportion = round(proportion, 4)
     data_size = len(data_column)
     
-    result = "PASS" if proportion > pass_rate and uniformity > 0.0001 else "FAIL"
+    result = "SUCCESS" if proportion > pass_rate and uniformity > 0.0001 else "FAILURE"
     
     return chi2_p_value, ks_p_value, pass_count, data_size, proportion, pass_rate, result
 

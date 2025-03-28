@@ -13,7 +13,8 @@
     border: 1px solid #333;
     padding: 10px;
     width: auto;
-    max-height: 300px;
+    min-height: 480px;
+    max-height: 480px;
     /* Altura máxima para 10 líneas (ejemplo) */
     overflow-y: auto;
     /* Activa el scroll vertical cuando se supere la altura */
@@ -147,8 +148,8 @@
 
 /* Activity log and Entropy test styles */
 #entResults {
-    background-color: #000;
-    color: #00ff00;
+    background-color: #f8f3f3;
+    color: #012401;
     padding: 10px;
     font-family: monospace;
     border: 1px solid #333;
