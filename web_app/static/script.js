@@ -74,8 +74,8 @@ async function defaultSample() {
     lblSample = document.getElementById('lblSample');
     if (lblSample.textContent.includes("Load")) {
         document.getElementById('data_file').removeAttribute("onclick");
-        document.getElementById('data_file').textContent = "Using internal sample file";
-        lblSample.innerHTML = "<i class='ti ti-user-check'></i> Use personal binary random file";
+        document.getElementById('data_file').innerHTML = "Using internal sample file:<br> SAMPLE.BIN - 2.0 GB";
+        lblSample.innerHTML = "<i class='ti ti-user-check'></i> Use custom binary random file";
         document.getElementById('uploadButton').style.display = "none";
         addLogMessage("Using sample random numbers file");
 
@@ -85,7 +85,7 @@ async function defaultSample() {
         })
             .then(response => response.json())
             .then(data => {
-                if (data.data.includes("pi.bin")) { 
+                if (data.data.includes("SAMPLE.BIN")) { 
                     addLogMessage("Sample file loaded");
                     selectedFileName = data.data;
                     fileUploaded = true;
@@ -355,7 +355,7 @@ async function startTest() {
 
         const tests = document.querySelectorAll('input[type="checkbox"]');
 
-        if(!selectedFileName.includes('pi.bin')){
+        if(!selectedFileName.includes('SAMPLE.BIN')){
             if (secSize * secNum > selectedFileSize * 8) {
                 addLogMessage("Insufficient data in file");
                 return;
@@ -389,7 +389,7 @@ async function startTest() {
             return;
         }
 
-        addLogMessage("Running NIST tests...");
+        addLogMessage("Running NIST  SP800-22 tests...");
         document.getElementById("actionsTable").style.display = "none";
 
         tests.forEach(checkbox => {
@@ -456,7 +456,7 @@ async function startTest() {
             clearTable();
         }
         else {
-            addLogMessage("NIST tests completed");
+            addLogMessage("NIST SP800-22 tests completed");
             document.getElementById("actionsTable").style.display = "table";
         }
 

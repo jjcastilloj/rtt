@@ -1,16 +1,20 @@
 # Archivo de registro de los experimentos
 
 ## Instrucciones
-1. Ejecutar las pruebas con Fast NIST en el servidor.
-2. Empaquetar el directorio experiments en formato tar (experiments<*nn*>.tar)
-3. Actualiza el archivo experiments_log.md
-4. Copiar el archivo empaquetado al PC en el directorio nist_test y desempaquetar.
-5. Ejecutar el script de python.
+1. Ejecutar las pruebas con Fast NIST en el servidor tomando como archivo de origen el producido por el generador.
+2. El archivo *test.sh* permite definir los parámetros de la ejecución del comando *assess* que ejecuta las pruebas.
+3. Una vez finalizada la prueba, empaquetar el directorio experiments en formato tar (experiments<*nn*>.tar)
+4. Actualizar el archivo experiments_log.md para llevar el registro de detalles del experimento.
+5. Copiar el archivo empaquetado al PC en el directorio fast-nist y desempaquetar (se sobreescribirá todo el contenido del directorio *experiments*).
+6. Modificar las variables del script process_results.py:
+nbits = "1.000.000" # Número de bits por secuencia (solo informativo para los reportes, el número real se especifica en *tests.sh* y deben coincidir)
+results_dir = "results/experiments00/" # Se debe modificar el directorio donde se almacenarán los resultados del experimento, en este caso *results/experiments00*
+Ejecutar el script de python.
 ```bash
-python report.py
+python process_results.py
 ```
-El script genera archivos de gráficos de boxplots en formato PNG para las pruebas (*Others.png*) tiene los gráficos de las que no se encuentren
-generadas separadamente.
+El script genera el archivo *Others.png* con los boxplots para las pruebas que tienen un solo resultado. Para las pruebas
+que tienen mas de un resultado, se genera un archivo de boxplot con el nombre de la prueba.
 El script genera el archivo *global_results.csv* con el consolidado de los resultados.
 Estos archivos se generan en el directorio *results/experimentsNN* para su posterior análisis. NN es el número asignado al experimento.
 
@@ -19,13 +23,13 @@ Estos archivos se generan en el directorio *results/experimentsNN* para su poste
 ### Estructura de archivos:
 
 La carpeta "experiments/AlgorithmTesting" contiene una estructura archivos donde se almacenan los resultados para cada
-experimento. Éstos se sobre escriben cada vez que se ejecuta el comando "assesss"
+experimento. Éstos se sobre escriben cada vez que se ejecuta el comando "assesss" mediante "test.sh"
 
 - *finalAnalysisReport.txt:* contiene el reporte general de resultados
 - *freq:* contiene los conteos de 1s y 0s para cada una de las secuencias
 - *results.txt:* contiene consolidado de los valores del estadístico calculado para cada prueba
 
-Además, una directorio con el nombre de cada prueba, en cada uno de las cuales se identifican los archivos:
+Además un directorio con el nombre de cada prueba, en cada uno de los cuales se identifican los archivos:
 
 - *results.txt:* contiene los valores del estadístico que aplica la prueba en cuestión (generalmente chi2).
                     Si la prueba se ejecuta varias veces, el archivo agrupa los resultados uno por cada linea.
@@ -41,13 +45,13 @@ Además, una directorio con el nombre de cada prueba, en cada uno de las cuales 
 |Fecha| Hora| Archivo BIN | Archivo de resultados | Descripción |
 |----------|----------|----------|----------|----------|
 |12/02/25|10:40|RNDF00.BIN|experiments00.tar|Pruebas NIST sobre un archivo de 2GB, 100 streams, 1000000 bits por stream (solo para probar el programa)|
-|12/02/25|11:20|RNDF01.BIN|experiments01.tar|Pruebas NIST sobre un archivo de 1GB, 8000 streams, 1000000 bits por stream. ESP32C3 apagado módulos RF|
-|24/02/25|12:15|WRNDF01.BIN|experiments02.tar|Pruebas NIST sobre un archivo de 1GB, 8000 streams, 1000000 bits. ESP32C3 encendido módulos RF|
+|12/02/25|11:20|RNDF01.BIN|experiments01.tar|Pruebas NIST sobre un archivo de 1GB, 8000 streams, 1000000 bits por stream. ESP32C3 encendido módulos RF con saturación|
+|24/02/25|12:15|WRNDF01.BIN|experiments02.tar|Pruebas NIST sobre un archivo de 1GB, 8000 streams, 1000000 bits. ESP32C3 encendido módulos RF en condiciones normales
 |25/02/25|15:28|AWRNDF02.BIN|experiments02.tar|Pruebas NIST sobre un archivo de 1GB, 8000 streams, 1000000 bits. ESP32C3 encendido módulos RF en cámara anecoica
 ----
 
 ## Modificaciones realizadas al codigo C de Fast Nist
-Se modificó el código fuente original de Fast Nist para poder definir por la línea de comandos, un directorio de salida para los resultados ya que
+Se modificó el código fuente original de Fast Nist para poder definir por la línea de comandos un directorio de salida para los resultados ya que
 originalmente, los resultados se guardan en la estructura de directorios a partir del directorio "experiments" que debe estar en el directorio
 donde se ejecuta el comando, de lo contrario produce error. El cambio realizado permite especificar un directorio particular para la salida de los 
 resultados independientemente desde donde se ejecute el comando assess.

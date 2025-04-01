@@ -108,8 +108,8 @@ def setup_session():
         if not os.path.exists(symlink_path):
             os.symlink(templates_path, symlink_path)
         # Create symlink to sample random numbers file
-        sample_path = os.path.join(APP_ROOT, 'data', 'pi.bin')
-        symlink_path = os.path.join(session_dir, 'data', 'pi.bin')
+        sample_path = os.path.join(APP_ROOT, 'data', 'SAMPLE.BIN')
+        symlink_path = os.path.join(session_dir, 'data', 'SAMPLE.BIN')
         if not os.path.exists(symlink_path):
             os.symlink(sample_path, symlink_path)
 
@@ -179,7 +179,7 @@ def use_sample_file():
         JSON: Response containing the sample file information
     """
     print("My session is => ", session.get('session_id'))
-    session['binary_file'] = 'pi.bin'
+    session['binary_file'] = 'SAMPLE.BIN'
     print("Binary data file is (SAMPLE): ", session.get('binary_file'))
     
     return jsonify({"data": session.get('binary_file')}), 200
@@ -293,27 +293,36 @@ def fit_test(data_column: pd.Series):
     """
     #print(test_params)
     alpha = 0.01
-    data_column = data_column[data_column > 0]
-    pass_rate = 0.99 - 3.0 * np.sqrt(0.01 * (1.0 - alpha) / (len(data_column)))  # From NIST-STS code
-    pass_rate = round(pass_rate, 6)
+    if len(data_column) > 1:
+        data_column = data_column[data_column > 0]
+        pass_rate = 0.99 - 3.0 * np.sqrt(0.01 * (1.0 - alpha) / (len(data_column)))  # From NIST-STS code
+        pass_rate = round(pass_rate, 6)
+        
+        F, _ = np.histogram(data_column, bins=np.linspace(0, 1, 11))
+        expected = np.full(F.shape, F.sum() / F.size, dtype=np.float64)
     
-    F, _ = np.histogram(data_column, bins=np.linspace(0, 1, 11))
-    expected = np.full(F.shape, F.sum() / F.size, dtype=np.float64)
-   
-    _, chi2_p_value = chisquare(F, expected)
-    _, ks_p_value = ks_1samp(data_column, uniform.cdf)
-    chi2_p_value = round(chi2_p_value, 6)
-    ks_p_value = round(ks_p_value,6)
-    pass_count = (data_column > alpha).sum()
-    uniformity = scipy.special.gammaincc(9.0/2.0, chi2_p_value/2.0)
-    #print("Uniformity = ", uniformity)   
-    proportion = pass_count / len(data_column)
-    proportion = round(proportion, 4)
-    data_size = len(data_column)
-    
-    result = "SUCCESS" if proportion > pass_rate and uniformity > 0.0001 else "FAILURE"
-    
-    return chi2_p_value, ks_p_value, pass_count, data_size, proportion, pass_rate, result
+        _, chi2_p_value = chisquare(F, expected)
+        _, ks_p_value = ks_1samp(data_column, uniform.cdf)
+        chi2_p_value = round(chi2_p_value, 6)
+        ks_p_value = round(ks_p_value,6)
+        pass_count = (data_column > alpha).sum()
+        uniformity = scipy.special.gammaincc(9.0/2.0, chi2_p_value/2.0)
+        #print("Uniformity = ", uniformity)   
+        proportion = pass_count / len(data_column)
+        proportion = round(proportion, 4)
+        data_size = len(data_column)
+
+        result = "SUCCESS" if proportion > pass_rate and uniformity > 0.0001 else "FAILURE"
+        return chi2_p_value, ks_p_value, pass_count, data_size, proportion, pass_rate, result
+    else:
+        chi2_p_value = data_column[0]
+        ks_p_value = "NA"
+        pass_rate = alpha
+        pass_count = 1 if chi2_p_value > alpha else 0
+        data_size = len(data_column)
+        proportion = pass_count / len(data_column)
+        result = "SUCCESS" if chi2_p_value > alpha else "FAILURE"
+        return chi2_p_value, ks_p_value, pass_count, data_size, proportion, pass_rate, result
 
 ##################################################################
 ####### Process the resulkt files after run assess command #######

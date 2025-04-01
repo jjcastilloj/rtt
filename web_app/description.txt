@@ -1,0 +1,72 @@
+NIST Randomness Testing Tool (RTT) Web Application - Code Description
+
+1. Application Overview:
+This is a Flask-based web application that serves as an interface for the NIST Statistical Test Suite (STS),
+designed to perform statistical testing on binary random number sequences. The application provides a web-based
+platform for uploading, analyzing, and validating random number sequences.
+
+2. Core Dependencies:
+- Flask: Web framework for the application
+- Redis: Session management and data storage
+- NumPy/Pandas/SciPy: Statistical processing and analysis
+- Werkzeug: Security utilities and file handling
+
+3. Main Features:
+a) Session Management:
+   - Redis-based secure session handling
+   - 30-minute session lifetime
+   - Secure cookie configuration with HTTPS enforcement
+
+b) File Operations:
+   - Secure file upload functionality
+   - Support for multiple file formats (.tar, .png, .jpg, .jpeg, .gif, .bin, .txt)
+   - Temporary file storage in /tmp/rtt
+
+c) Statistical Testing:
+   - Implementation of NIST statistical test suite
+   - Supports 15 different statistical tests
+   - Comprehensive result analysis and validation
+
+d) Security Features:
+   - Secure session management
+   - Protected file uploads
+   - HTTP-only cookies
+   - HTTPS preferred configuration
+   - Same-site cookie policy
+
+4. API Endpoints:
+- /api/setup: Session initialization
+- /api/upload: File upload handling
+- /api/sample: Sample data processing
+- /api/test: Statistical test execution
+- /api/download_results: Results retrieval
+- /api/ent: Entropy calculation
+
+5. Key Functions:
+- allowed_file(): Validates file extensions
+- setup_session(): Initializes user sessions
+- upload_file(): Handles file uploads
+- test_process(): Executes statistical tests
+- run_assess(): Processes test parameters
+- fit_test(): Performs statistical analysis
+- create_tar_file(): Packages results for download
+
+6. Statistical Analysis Features:
+- Chi-square testing
+- Kolmogorov-Smirnov testing
+- Pass rate calculation
+- Proportion analysis
+- Uniformity testing
+
+7. Security Considerations:
+Note: The application contains a hardcoded SECRET_KEY which should be moved to a secure configuration file
+or environment variable in a production environment.
+
+8. File Structure:
+The application maintains a structured directory system for each user session, including:
+- Temporary storage for uploaded files
+- Separate directories for different test results
+- Organized experiment directories
+
+This application serves as a comprehensive tool for statistical testing of random number sequences,
+providing both functionality and security features necessary for proper operation in a web environment.

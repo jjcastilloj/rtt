@@ -130,7 +130,8 @@ main(int argc, char *argv[])
 			else
 				fclose(fp);
 		}
-		/* Includes --prefix arg that define a prefix directory to store results (before "experiments" directory) */	
+		/* Includes --prefix arg that define a prefix directory to store results (before "experiments" directory) 
+		Juan Castillo*/	
 		if (!strcmp(argv[i], "-prefix") || !strcmp(argv[i], "--prefix")) {
 			sprintf(prefixDir, "%s", argv[++i]);
 			cmdFlags.argCounter = cmdFlags.argCounter + 2;

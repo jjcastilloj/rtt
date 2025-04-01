@@ -2,13 +2,14 @@ import numpy as np
 import pandas as pd
 import os
 import glob
+import scipy.special
 from scipy.stats import ks_1samp, uniform, chisquare
 import matplotlib.pyplot as plt
 import seaborn as sns
 
 alfa = 0.01
 nbits = "1.000.000"
-results_dir = "results/urandom/"
+results_dir = "results/compare/"
 
 base_dir = "experiments/AlgorithmTesting/"
 tests_results = pd.DataFrame() # Dataframe to store the result of test with only 1 result
@@ -25,23 +26,48 @@ nist_tests = {
 # Goodness of fit test
 def fit_test(data_column: pd.Series):
    
-    data_column = data_column[data_column > 0]
-    pass_rate = 0.99 - 3.0 * np.sqrt(0.01 * (1.0 - alfa) / (len(data_column)))  # From NIST-STS code
-    pass_rate = round(pass_rate, 6)
-    F, _ = np.histogram(data_column, bins=np.linspace(0, 1, 11))
-    expected = np.full(F.shape, F.sum() / F.size, dtype=np.float64)
-   
-    _, chi2_p_value = chisquare(F, expected)
-    _, ks_p_value = ks_1samp(data_column, uniform.cdf)
-    chi2_p_value = round(chi2_p_value, 6)
-    ks_p_value = round(ks_p_value,6)
-    pass_count = (data_column > alfa).sum()
-    proportion = pass_count / len(data_column)
-    proportion = round(proportion, 4)
-    data_size = len(data_column)
-    result = "PASS" if proportion > pass_rate else "FAIL"
+    """
+    Apply goodness-of-fit tests to the test results.
     
-    return chi2_p_value, ks_p_value, pass_count, data_size, proportion, pass_rate, result
+    Args:
+        data_column (pd.Series): Series containing test results
+        
+    Returns:
+        tuple: Statistical measures including chi-square, KS test, pass count,
+               data size, proportion, pass rate, and overall result
+    """
+    #print(test_params)
+    alpha = 0.01
+    if len(data_column) > 1:
+        data_column = data_column[data_column > 0]
+        pass_rate = 0.99 - 3.0 * np.sqrt(0.01 * (1.0 - alpha) / (len(data_column)))  # From NIST-STS code
+        pass_rate = round(pass_rate, 6)
+        
+        F, _ = np.histogram(data_column, bins=np.linspace(0, 1, 11))
+        expected = np.full(F.shape, F.sum() / F.size, dtype=np.float64)
+    
+        _, chi2_p_value = chisquare(F, expected)
+        _, ks_p_value = ks_1samp(data_column, uniform.cdf)
+        chi2_p_value = round(chi2_p_value, 6)
+        ks_p_value = round(ks_p_value,6)
+        pass_count = (data_column > alpha).sum()
+        uniformity = scipy.special.gammaincc(9.0/2.0, chi2_p_value/2.0)
+        #print("Uniformity = ", uniformity)   
+        proportion = pass_count / len(data_column)
+        proportion = round(proportion, 4)
+        data_size = len(data_column)
+
+        result = "SUCCESS" if proportion > pass_rate and uniformity > 0.0001 else "FAILURE"
+        return chi2_p_value, ks_p_value, pass_count, data_size, proportion, pass_rate, result
+    else:
+        chi2_p_value = data_column[0]
+        ks_p_value = "NA"
+        pass_rate = alpha
+        pass_count = 1 if chi2_p_value > alpha else 0
+        data_size = len(data_column)
+        proportion = pass_count / len(data_column)
+        result = "SUCCESS" if chi2_p_value > alpha else "FAILURE"
+        return chi2_p_value, ks_p_value, pass_count, data_size, proportion, pass_rate, result
 
 def draw_boxplot2(data, msg):
     
@@ -78,6 +104,8 @@ def draw_boxplot(data, msg, filename):
 #####################################################
 ####                 Main Program                ####
 #####################################################
+
+print("Processing results...")
 
 os.makedirs(results_dir, exist_ok=True) # Create results directory
 
