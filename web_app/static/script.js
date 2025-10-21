@@ -392,6 +392,8 @@ async function startTest() {
         addLogMessage("Running NIST  SP800-22 tests...");
         document.getElementById("actionsTable").style.display = "none";
 
+        const start = performance.now();
+
         tests.forEach(checkbox => {
             if (checkbox.checked) {
 
@@ -409,7 +411,7 @@ async function startTest() {
                 })
                     .then(response => response.json())
                     .then(data => {
-                        //console.log('Server response:', data);
+                        console.log('Server response:', data);
                         if (data['code'] == -1) {
                             requestError = true;
                             return;
@@ -435,6 +437,7 @@ async function startTest() {
                         let test_result = `<span class="d-flex align-items-center gap-2">
                               <i class="fas fa-circle ` + circleColor + ` text-success f-10 m-r-5"></i>` + data['result'] + `</span>`;
                         updateTable(data['test'], 8, test_result);
+                        updateTable(data['test'], 9, data['time'].toFixed(2));
 
                     })
                     .catch(error => {
@@ -450,6 +453,10 @@ async function startTest() {
         });
 
         let responses = await Promise.all(requests);
+
+        const end = performance.now();
+        const elapsed = end - start;
+        addLogMessage(`All tests completed in ${(elapsed).toFixed(2)} ms`);
 
         if (requestError) {
             addLogMessage("Required data missing");
@@ -626,7 +633,7 @@ function startEnt(){
     .then(data => {
         //console.log("Resultado de la API:", data);
         if(data.status.includes("OK")){
-            addLogMessage("Entropy test complete");
+            addLogMessage("Entropy test complete in" + (data.elapsed_time ? ` in ${data.elapsed_time.toFixed(2)} ms` : ''));
             entResults.textContent = "Source file: " + data.file + "\n\n" + data.result;
         }
     })

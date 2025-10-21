@@ -35,6 +35,7 @@ from flask_session import Session
 from werkzeug.utils import secure_filename
 from scipy.stats import ks_1samp, uniform, chisquare
 from datetime import timedelta
+import time
 
 # Initialize Flask application
 app = Flask(__name__)
@@ -212,10 +213,14 @@ def test_process():
             return jsonify({"msg": f"Required data missing {key}", "code": -1}), 400
     
     # First execute the assess command with received parameters to generate results file
+    start_time = time.time()
     run_assess(test_params)
     # Then process the result files
     results = process_results(nist_test[test_params['test'] - 1])
-        
+
+    end_time = time.time()
+    elapsed_time = (end_time - start_time) * 1000  # in milliseconds
+
     response = {
         "msg": "OK",
         "test": test_params['test'],
@@ -225,7 +230,8 @@ def test_process():
         "secuences": int(results[3]),
         "proportion": results[4],
         "passrate": results[5],
-        "result": results[6]
+        "result": results[6],
+        "time": elapsed_time,
     }
     #print(test_params)
     return jsonify(response), 200
@@ -443,12 +449,17 @@ def run_ent():
     session_dir = session.get('session_dir')
     file_path = os.path.join(session_dir, 'data', file)
 
+    start_time = time.time()
     result = subprocess.run(["ent", "-b", file_path], capture_output=True, text=True)
+    end_time = time.time()
+    elapsed_time = (end_time - start_time) * 1000 # in milliseconds
+    exec_time = f"Entropy test finished in {elapsed_time:.2f} ms"
+    result.stdout += "\n" + exec_time
 
     if result.returncode != 0:
         return jsonify({"error": f"Error executing command: {result.stderr}"}), 500
 
-    return jsonify({"result": result.stdout, "status": "OK", "file": file})
+    return jsonify({"result": result.stdout, "elapsed_time": elapsed_time, "status": "OK", "file": file})
 
 #################################################################
 #################################################################
