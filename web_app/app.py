@@ -50,7 +50,7 @@ app.config['SESSION_PERMANENT'] = False
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=30)
 app.config['PREFERRED_URL_SCHEME'] = 'https'
 app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
-app.config['SESSION_COOKIE_SECURE'] = True
+app.config['SESSION_COOKIE_SECURE'] = False
 app.config['SESSION_COOKIE_HTTPONLY'] = True
 app.config['SESSION_COOKIE_PATH'] = '/'
 
@@ -216,7 +216,8 @@ def test_process():
     start_time = time.time()
     run_assess(test_params)
     # Then process the result files
-    results = process_results(nist_test[test_params['test'] - 1])
+    test_index = int(test_params['test']) - 1
+    results = process_results(nist_test[test_index])
 
     end_time = time.time()
     elapsed_time = (end_time - start_time) * 1000  # in milliseconds
@@ -249,32 +250,34 @@ def run_assess(params):
     test_string = ''.join(['1' if i == params['test'] else '0' for i in range(1, 16)])
     session_dir = session.get('session_dir')
     data_file = session.get('binary_file')
+
+    #print(f"Session dir is {session_dir} and data file is {data_file}")
    
     command = ['./assess', 
                 '--fast', 
                 '--prefix', session_dir,
                 '--file', os.path.join(session_dir, 'data', data_file),
                 '--tests', test_string,
-                '--streams', params['secNum'],
-                '--blockfreqpar', params['blockFreq'],
-                '--nonoverpar', params['blockNon'],
-                '--overpar', params['blockOver'],
-                '--approxpar', params['blockApprox'],
-                '--serialpar', params['blockSerial'],
-                '--linearpar', params['blockLinear'],
+                '--streams', str(params['secNum']),
+                '--blockfreqpar', str(params['blockFreq']),
+                '--nonoverpar', str(params['blockNon']),
+                '--overpar', str(params['blockOver']),
+                '--approxpar', str(params['blockApprox']),
+                '--serialpar', str(params['blockSerial']),
+                '--linearpar', str(params['blockLinear']),
                 '--fileoutput',
                 '--binary',
                 params['secSize']
             ]
-  
-    print("Running command: ", ' '.join(command))
+    command = [str(c) for c in command]
+    print("Running command:", ' '.join(command))
 
     try:
     
         result = subprocess.run(command, capture_output=True, text=True)
         #print("Return code:", result.returncode)
-        #print("Standar output:", result.stdout)
-        #print("Standar error:", result.stderr)
+        print("Standar output:", result.stdout)
+        print(f"Standar error:", result.stderr if result.stderr else "No errors")
         
         if result.returncode in (0, 1):
             return result.stdout
@@ -331,7 +334,7 @@ def fit_test(data_column: pd.Series):
         return chi2_p_value, ks_p_value, pass_count, data_size, proportion, pass_rate, result
 
 ##################################################################
-####### Process the resulkt files after run assess command #######
+####### Process the result files after run assess command #######
 ##################################################################
 def process_results(test_name):
     """
@@ -345,7 +348,8 @@ def process_results(test_name):
     """
     session_dir = session.get('session_dir')
     results_file = os.path.join(session_dir,'experiments/AlgorithmTesting', test_name, 'results.txt')
-    #print(file_name)
+    
+    print(f"Processing results file: {results_file}")
 
     if os.path.getsize(results_file) == 0:
         print("Empty results file")
@@ -461,7 +465,7 @@ def run_ent():
 
     return jsonify({"result": result.stdout, "elapsed_time": elapsed_time, "status": "OK", "file": file})
 
-#################################################################
+
 #################################################################
 #############              Main App                ##############
 #################################################################

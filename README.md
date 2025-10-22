@@ -81,7 +81,7 @@ The NIST Randomness Testing Tool (RTT) is a web-based application that provides 
 ## Usage
 
 ### Starting a Test Session
-1. Access the web interface at `http://localhost:5000`
+1. Access the web interface at `http://localhost:8000`
 2. Click "Setup Environment" to initialize the session
 3. Choose between uploading a custom file or using the sample file
 

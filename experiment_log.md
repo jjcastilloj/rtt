@@ -62,3 +62,44 @@ Se incluyeron los cambios en los archivos:
 *assess.c*  Se cambio la definición estática "experiments" por *<ruta/de/salida/experiments>* y la llamada a la función *openOutputStreams* con un nuevo argumento *outputDir*
 *utils.c* Se cambio la definición estática "experiments" por *<ruta/de/salida/experiments>*
 *utils.h* Se actualizó la definicón del prototipo
+
+## Para tener en cuenta
+
+La aplicación **Python Flask** se ejecuta mediante **Gunicorn**, el cual se hace disponible para la aplicación cuando se activa el entorno virtual `env-nist-test` con el siguiente comando:
+
+```bash
+source env-nist-test/bin/activate
+```
+
+Gunicorn se ejecuta bajo **systemd** con el módulo ubicado en:
+
+```
+/etc/systemd/system/rtt.service
+```
+
+Puedes iniciar o detener el servicio con los comandos:
+
+```bash
+sudo systemctl start rtt
+sudo systemctl stop rtt
+```
+
+---
+
+### Código del archivo `rtt.service`
+
+```ini
+[Unit]
+Description=Gunicorn instance to serve NIST Tests
+After=network.target
+
+[Service]
+User=jcastillo
+Group=jcastillo
+WorkingDirectory=/opt/web_app
+ExecStart=/home/jcastillo/nist/env-nist-tests/bin/gunicorn -k gthread --workers=9 --threads=4 --timeout=360 --bind 0.0.0.0:8000 wsgi:app
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+```

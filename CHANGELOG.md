@@ -1,6 +1,14 @@
 # Changelog
+
+
+## [v1.4]
+### Add a new fron-end script to autamte test
+- Add iot_client.py to emulate multiple test request to the back-end
+- Some little modifications to back-end
+- Update CHANGELOG and experiments log file
+
 ## [v1.3] - 2025-10-21
-### Fixed calculations for 1 sequence
+### Add some importan scripts related with execution time analysis
 - Add time execution calculation for each test an overall test (back-end and fonnt-end).
 - Add time execution of entrpopy test (back-end and fonnt-end).
 - Add python script to compute execution times o f STS oficial version and Fast NIST version.
