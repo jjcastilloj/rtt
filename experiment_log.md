@@ -97,7 +97,7 @@ After=network.target
 User=jcastillo
 Group=jcastillo
 WorkingDirectory=/opt/web_app
-ExecStart=/home/jcastillo/nist/env-nist-tests/bin/gunicorn -k gthread --workers=9 --threads=4 --timeout=360 --bind 0.0.0.0:8000 wsgi:app
+ExecStart=/home/jcastillo/nist/env-nist-tests/bin/gunicorn -k gthread --workers=8 --threads=8 --timeout=360 --bind 0.0.0.0:8000 wsgi:app
 Restart=always
 
 [Install]

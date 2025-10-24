@@ -156,7 +156,7 @@ def run_emulation():
                     df.loc[df_idx] = [
                         idx, 
                         response['test'], 
-                        response['result'], 
+                        "PASS" if response['result'] else "FAIL", 
                         response['passrate'], 
                         response['chisquare'], 
                         response['ks'], 
@@ -177,17 +177,6 @@ def run_emulation():
 
 run_emulation()
 
-'''generate_random_file(TMP_FILE, NUM_SECUENCES, BITS_PER_SECUENCE)
-    #print(test_params)
-    if upload_file(client_session, SERVER_URL, TMP_FILE):
-        for test in run_tests:
-            test_params['test'] = test
-            response = send_test_request(client_session, SERVER_URL, test_params)
-
-            if response:
-                print(f"{response['test']},{response['result']},{response['passrate']},{response['time']:.2f}")
-            else:
-                print(f"Test {test} failed for client {client_id}")'''
 
 
 
