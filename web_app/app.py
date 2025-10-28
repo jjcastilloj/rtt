@@ -50,7 +50,7 @@ app.config['SESSION_PERMANENT'] = False
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=30)
 app.config['PREFERRED_URL_SCHEME'] = 'https'
 app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
-app.config['SESSION_COOKIE_SECURE'] = False
+app.config['SESSION_COOKIE_SECURE'] = True
 app.config['SESSION_COOKIE_HTTPONLY'] = True
 app.config['SESSION_COOKIE_PATH'] = '/'
 
@@ -63,7 +63,6 @@ Session(app)
 
 # Define allowed file extensions for uploads
 ALLOWED_EXTENSIONS = {'tar', 'png', 'jpg', 'jpeg', 'gif', 'bin', 'txt'}
-
 def allowed_file(filename):
     """
     Check if the uploaded file has an allowed extension.
