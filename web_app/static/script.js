@@ -344,6 +344,7 @@ async function startTest() {
             return;
         }
 
+        clearTable();
         const secSize = document.getElementById('secuenceSize').value;
         const secNum = document.getElementById('secuenceNum').value;
         const blockFreq = document.getElementById('blockFreq').value;

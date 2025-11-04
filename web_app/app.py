@@ -86,7 +86,7 @@ def setup_session():
     Returns:
         JSON: Response containing session ID and status message
     """
-    #session.clear()
+    session.clear()
     
     if 'session_id' not in session:
         print("Session not found, creating one...")
@@ -232,6 +232,7 @@ def test_process():
         "passrate": results[5],
         "result": results[6],
         "time": elapsed_time,
+        "session_id": session.get('session_id')
     }
     #print(test_params)
     return jsonify(response), 200
@@ -453,7 +454,7 @@ def run_ent():
     file_path = os.path.join(session_dir, 'data', file)
 
     start_time = time.time()
-    result = subprocess.run(["ent", "-b", file_path], capture_output=True, text=True)
+    result = subprocess.run(["ent", file_path], capture_output=True, text=True)
     end_time = time.time()
     elapsed_time = (end_time - start_time) * 1000 # in milliseconds
     exec_time = f"Entropy test finished in {elapsed_time:.2f} ms"

@@ -1,9 +1,13 @@
 # Changelog
-
+## [v1.5]
+### Fixed problems of data corruption in automated test
+- Fixed problems derivated from use of shared Dataframe in the automated test script
+- Fixed problem in front end when select/deselect individual test (clear table)
 
 ## [v1.4]
-### Add a new fron-end script to autamte test
+### Add a new fron-end script to autoamate test
 - Add iot_client.py to emulate multiple test request to the back-end
+- Add iot_client_async.py to automate asynchornous test
 - Some little modifications to back-end
 - Update CHANGELOG and experiments log file
 
