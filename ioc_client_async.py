@@ -12,7 +12,7 @@ import os
 import shutil
 
 NUM_CLIENTS = 4
-NUM_SECUENCES = 10
+NUM_SECUENCES = 55
 BITS_PER_SECUENCE = 1_000_000
 SERVER_URL = "https://mindub.ddns.net"
 
@@ -104,7 +104,8 @@ def send_test_request(session, server_url, params):
 # ===========================
 sessions = []
 df_columns = ['IoT Device Number', 'Source', 'Test', 
-              'Result', 'Chi square', 'Kolmogorov-Smirnov', 'Time (ms)']
+              'Result', 'Chi square', 'Kolmogorov-Smirnov', 
+              'Proportion', 'Pass rate', 'Time (ms)']
 
 lock = threading.Lock()
 results_queue = queue.Queue()
@@ -164,6 +165,7 @@ try:
         while not results_queue.empty():
             client_idx, response = results_queue.get()
             if response:
+                print(response)
                 _, src = last_data_per_client[client_idx]
                 df = pd.concat([df, pd.DataFrame([{
                     'IoT Device Number': client_idx,
@@ -172,6 +174,8 @@ try:
                     'Result': response['result'],
                     'Chi square': response['chisquare'],
                     'Kolmogorov-Smirnov': response['ks'],
+                    'Proportion': response['proportion'],
+                    'Pass rate': response['passrate'],
                     'Time (ms)': f"{response['time']:.2f}"
                 }])], ignore_index=True)
 
