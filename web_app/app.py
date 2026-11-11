@@ -305,24 +305,24 @@ def fit_test(data_column: pd.Series):
     if len(data_column) > 1:
         data_column = data_column[data_column > 0]
         pass_rate = 0.99 - 3.0 * np.sqrt(0.01 * (1.0 - alpha) / (len(data_column)))  # From NIST-STS code
-        pass_rate = round(pass_rate, 6)
+        #pass_rate = round(pass_rate, 6)
         
         F, _ = np.histogram(data_column, bins=np.linspace(0, 1, 11))
         expected = np.full(F.shape, F.sum() / F.size, dtype=np.float64)
     
         _, chi2_p_value = chisquare(F, expected)
         _, ks_p_value = ks_1samp(data_column, uniform.cdf)
-        chi2_p_value = round(chi2_p_value, 6)
-        ks_p_value = round(ks_p_value,6)
+        #chi2_p_value = round(chi2_p_value, 6)
+        #ks_p_value = round(ks_p_value,6)
         pass_count = (data_column > alpha).sum()
         uniformity = scipy.special.gammaincc(9.0/2.0, chi2_p_value/2.0)
         #print("Uniformity = ", uniformity)   
         proportion = pass_count / len(data_column)
-        proportion = round(proportion, 4)
+        #proportion = round(proportion, 6)
         data_size = len(data_column)
 
         result = "SUCCESS" if proportion > pass_rate and uniformity > 0.0001 else "FAILURE"
-        return chi2_p_value, ks_p_value, pass_count, data_size, proportion, pass_rate, result
+        return f"{chi2_p_value:.6f}", f"{ks_p_value:.6f}", pass_count, data_size, f"{proportion:.6f}", f"{pass_rate:.6f}", result
     else:
         chi2_p_value = data_column[0]
         ks_p_value = "NA"

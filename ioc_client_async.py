@@ -110,7 +110,7 @@ df_columns = ['IoT Device Number', 'Source', 'Test',
 lock = threading.Lock()
 results_queue = queue.Queue()
 
-# Init clien sessions
+# Init client sessions
 for _ in range(NUM_CLIENTS):
     client_session = create_client(SERVER_URL)
     sessions.append(client_session)

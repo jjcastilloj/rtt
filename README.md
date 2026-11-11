@@ -43,11 +43,22 @@ The NIST Randomness Testing Tool (RTT) is a web-based application that provides 
 
 ## Installation
 
+> **Note:** The installation and deployment instructions in this section are written for
+> **Linux** (tested on Ubuntu). On Windows the procedure is different: for example,
+> `systemd`, Nginx site paths such as `/etc/nginx/` and `/opt`, and the `export`/`sudo`
+> commands do not apply. The production deployment section (systemd + Nginx) is Linux-only.
+
 ### Prerequisites
-- Python 3.x
+- Linux (tested on Ubuntu 24.04 LTS)
+- Python 3.x (tested with Python 3.12)
 - Redis server
 - Modern web browser
 - NIST STS binary
+- For the production deployment only (see below):
+  - systemd (tested with version 255)
+  - Nginx (tested with version 1.24)
+  - Certbot with its Nginx plugin, to obtain the Let's Encrypt HTTPS certificates
+    (a domain name pointing to the server and open ports 80/443 are required)
 
 ### Setup Steps
 1. Clone the repository:
@@ -76,6 +87,93 @@ The NIST Randomness Testing Tool (RTT) is a web-based application that provides 
 5. Run the application:
    ```bash
    flask run
+   ```
+
+### Production Deployment (systemd + Nginx)
+
+The `configs/` directory contains the files used to run the application as a service
+with Gunicorn behind Nginx. The commands below assume you are in the root of the cloned
+repository (the directory that contains `configs/` and `web_app/`).
+
+| File in repo | Destination |
+|---|---|
+| `configs/gunicorn/rtt.service` | `/etc/systemd/system/rtt.service` |
+| `configs/nginx/nist-tests` | `/etc/nginx/sites-available/nist-tests` (enabled via a symlink in `/etc/nginx/sites-enabled/`) |
+
+1. Make the application available at the path used by the service and Nginx
+   (`/opt/web_app`):
+   ```bash
+   sudo ln -s "$PWD/web_app" /opt/web_app
+   ```
+
+2. Review the paths and the user in `configs/gunicorn/rtt.service` before installing it.
+   `User`, `Group` and the `ExecStart` path to the virtual environment's `gunicorn`
+   (`/home/jcastillo/nist/env-nist-tests/bin/gunicorn`) must match your machine.
+   Also change `server_name` and the certificate paths in `configs/nginx/nist-tests`
+   to your own domain.
+
+3. Install and start the Gunicorn service:
+   ```bash
+   sudo cp configs/gunicorn/rtt.service /etc/systemd/system/rtt.service
+   sudo systemctl daemon-reload
+   sudo systemctl enable --now rtt.service
+   systemctl status rtt.service
+   ```
+
+4. Obtain the HTTPS certificates (Let's Encrypt).
+
+   `configs/nginx/nist-tests` references certificates under
+   `/etc/letsencrypt/live/<your-domain>/` and two helper files
+   (`options-ssl-nginx.conf` and `ssl-dhparams.pem`) that Certbot's Nginx plugin creates.
+   Nginx will not start with this site until they exist, so first serve a temporary
+   HTTP-only site and let Certbot generate everything.
+
+   Requirements: `<your-domain>` must resolve to the public IP of this server and ports
+   80 and 443 must be reachable from the Internet (Let's Encrypt validates the domain
+   through port 80).
+
+   ```bash
+   # Install Certbot and its Nginx plugin
+   sudo apt install certbot python3-certbot-nginx
+
+   # Temporary HTTP-only site (replace <your-domain>)
+   sudo tee /etc/nginx/sites-available/nist-tests > /dev/null <<'EOF'
+   server {
+       listen 80;
+       server_name <your-domain>;
+       root /var/www/html;
+   }
+   EOF
+   sudo ln -sf /etc/nginx/sites-available/nist-tests /etc/nginx/sites-enabled/nist-tests
+   sudo nginx -t && sudo systemctl reload nginx
+
+   # Request the certificate (Certbot edits the temporary site to add SSL)
+   sudo certbot --nginx -d <your-domain>
+   ```
+
+   After this step `/etc/letsencrypt/live/<your-domain>/` exists. The next step replaces
+   the temporary site with the real one.
+
+5. Install the final Nginx site and reload Nginx (make sure `server_name` and the
+   certificate paths in `configs/nginx/nist-tests` already use `<your-domain>`, see step 2):
+   ```bash
+   sudo cp configs/nginx/nist-tests /etc/nginx/sites-available/nist-tests
+   sudo ln -sf /etc/nginx/sites-available/nist-tests /etc/nginx/sites-enabled/nist-tests
+   sudo nginx -t && sudo systemctl reload nginx
+   ```
+
+6. Check that the automatic certificate renewal works. Certbot installs a systemd timer
+   for this:
+   ```bash
+   systemctl status certbot.timer
+   sudo certbot renew --dry-run
+   ```
+
+7. Useful commands after changing a file:
+   ```bash
+   sudo systemctl daemon-reload && sudo systemctl restart rtt.service   # after editing rtt.service
+   sudo nginx -t && sudo systemctl reload nginx                          # after editing the Nginx site
+   journalctl -u rtt.service -f                                          # follow the service logs
    ```
 
 ## Usage

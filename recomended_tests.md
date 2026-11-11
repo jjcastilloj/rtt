@@ -1,24 +1,24 @@
-## Pruebas NIST más relevantes para una primera aproximación
+## Most Relevant NIST Tests for a First Approach
 
-| **Prueba** | **Qué mide** | **Comentario** |
+| **Test** | **What it Measures** | **Comment** |
 |-------------|--------------|----------------|
-| **Frequency** | Distribución de 0 y 1 | Mide si hay aproximadamente la misma cantidad de 0s y 1s. Fundamental y rápida. |
-| **Block Frequency** | Distribución en bloques | Detecta desequilibrios locales de bits dentro de bloques. |
-| **Runs** | Longitud de secuencias consecutivas | Evalúa si hay demasiadas o muy pocas secuencias consecutivas de un mismo bit. |
-| **Longest Run** | Longitud de la secuencia más larga | Detecta patrones anómalos en secuencias largas de 0 o 1. |
-| **Cumulative Sums (Cusum)** | Desviaciones acumuladas | Mide tendencias en la secuencia, útil para detectar “sesgos” ocultos. |
-| **Approximate Entropy** | Complejidad y repetición de patrones | Detecta patrones repetitivos que no aparecen en pruebas simples. |
+| **Frequency** | Distribution of 0s and 1s | Measures if there is approximately the same amount of 0s and 1s. Fundamental and fast. |
+| **Block Frequency** | Distribution in blocks | Detects local bit imbalances within blocks. |
+| **Runs** | Length of consecutive sequences | Evaluates whether there are too many or too few consecutive sequences of the same bit. |
+| **Longest Run** | Length of the longest sequence | Detects anomalous patterns in long sequences of 0s or 1s. |
+| **Cumulative Sums (Cusum)** | Cumulative deviations | Measures trends in the sequence, useful for detecting hidden "biases". |
+| **Approximate Entropy** | Complexity and pattern repetition | Detects repetitive patterns that do not appear in simple tests. |
 
 ---
 
-### Recomendación de parámetros para una primera evaluación
+### Parameter Recommendation for a First Evaluation
 
-- **Número de secuencias (`secNum`)**: 10–20  
-  (Más secuencias aumentan la confiabilidad estadística pero también el tiempo de ejecución.)
+- **Number of sequences (`secNum`)**: 10–20  
+  (More sequences increase statistical reliability but also execution time.)
 
-- **Tamaño de cada secuencia (`secSize`)**: entre 1 millón y 10 millones de bits.  
+- **Size of each sequence (`secSize`)**: between 1 million and 10 million bits.  
 
-#### Ejemplo sugerido
+#### Suggested Example
 ```python
-secNum = 10           # 10 secuencias por prueba
-secSize = 1_000_000   # 1 millón de bits por secuencia
+secNum = 10           # 10 sequences per test
+secSize = 1_000_000   # 1 million bits per sequence
